@@ -147,6 +147,7 @@ table {
 /* ---- base ---- */
 html {
   font-size: 62.5%;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -154,12 +155,16 @@ body {
   font-family: "Barlow", sans-serif;
   font-weight: 600;
   color: #818498;
-  line-height: 1.5;
+  line-height: 1.7;
 }
 
 img {
   vertical-align: middle;
   max-width: 100%;
+}
+
+a {
+  text-decoration: none;
 }
 
 /* ---- common ---- */
@@ -176,30 +181,35 @@ img {
 /* ---- header ---- */
 .header {
   background-image: url("../images/mobile/image-header.jpg");
+  background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
   height: 100vh;
   padding: 30px;
   text-align: center;
+  position: relative;
 }
 
 .header .navigation {
   margin-bottom: 130px;
 }
 .header .slogan {
-  max-width: 520px;
   font-family: "Fraunces", serif;
   font-weight: 900;
-  font-size: 4.1rem;
+  font-size: 4.4rem;
   color: white;
   line-height: 1.2;
   letter-spacing: 5px;
-  margin: auto;
-  margin-bottom: 130px;
 }
 .header .arrow {
-  display: inline-block;
-  padding: 30px;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 100px;
+  height: 250px;
+  transform: translateX(-50%);
+}
+.header .arrow .pic {
   -webkit-animation-name: down;
   animation-name: down;
   -webkit-animation-duration: 1s;
@@ -210,6 +220,22 @@ img {
   animation-direction: alternate;
 }
 
+@-webkit-keyframes down {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(106px);
+  }
+}
+@keyframes down {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(106px);
+  }
+}
 .navigation {
   display: flex;
   justify-content: space-between;
@@ -232,7 +258,7 @@ img {
 .navigation .global-nav::after {
   position: absolute;
   content: "";
-  top: -20px;
+  top: -19px;
   right: 0;
   width: 0;
   height: 0;
@@ -241,31 +267,14 @@ img {
   border-color: transparent transparent #ffffff transparent;
 }
 
-@-webkit-keyframes down {
-  0% {
-    transform: translateY(0);
-  }
-  100% {
-    transform: translateY(150px);
-  }
-}
-@keyframes down {
-  0% {
-    transform: translateY(0);
-  }
-  100% {
-    transform: translateY(150px);
-  }
-}
 .global-nav__menu {
-  padding: 30px 0;
+  padding: 20px 0;
 }
 .global-nav__item {
-  margin-bottom: 15px;
+  margin: 15px 0;
 }
 .global-nav__link {
   display: inline-block;
-  text-decoration: none;
   color: #818498;
   padding: 15px 30px;
   border-radius: 100px;
@@ -279,8 +288,8 @@ img {
 
 /* ---- feature ---- */
 .feature-card__content {
-  padding: 13.3333333333% 8%;
   text-align: center;
+  padding: 13.3333333333% 8%;
 }
 .feature-card__pic {
   width: 100%;
@@ -294,16 +303,15 @@ img {
   margin-bottom: 9.5238095238%;
 }
 .feature-card__txt {
-  font-size: 0.9em;
   margin-bottom: 9.5238095238%;
 }
 .feature-card__link {
   display: inline-block;
-  text-decoration: none;
   font-family: "Fraunces", serif;
   font-weight: 900;
   color: #23303e;
   position: relative;
+  line-height: 1.6;
 }
 .feature-card__link::after {
   content: "";
@@ -313,10 +321,13 @@ img {
   z-index: -1;
   display: block;
   width: calc(100% + 16px);
-  padding: 0 10px;
   border-radius: 100px;
   height: 10px;
   opacity: 0.2;
+  transition: opacity 0.5s;
+}
+.feature-card__link:hover::after {
+  opacity: 1;
 }
 .feature-card__link--yellow::after {
   background-color: #fad400;
@@ -328,28 +339,44 @@ img {
 .service-card {
   padding: 400px 30px 50px;
   text-align: center;
-  font-size: 0.8em;
 }
 .service-card .heading {
   font-family: "Fraunces", serif;
   font-weight: 900;
-  line-height: 1;
   font-size: 3rem;
   margin-bottom: 30px;
 }
 .service-card .txt {
   margin-left: auto;
   margin-right: auto;
-  max-width: 320px;
+  max-width: 380px;
+  max-height: 180px;
+  overflow: auto;
+}
+.service-card .txt::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  background-color: transparent;
+}
+.service-card .txt::-webkit-scrollbar {
+  width: 12px;
+  background-color: transparent;
+}
+.service-card .txt::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #555;
 }
 .service-card--design {
-  background-image: url("../images/mobile/image-graphic-design.jpg");
+  background-image: url("../images/desktop/image-graphic-design.jpg");
+  background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
   color: #25564b;
 }
 .service-card--photography {
-  background-image: url("../images/mobile/image-photography.jpg");
+  background-image: url("../images/desktop/image-photography.jpg");
+  background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
   color: #19536b;
@@ -365,7 +392,7 @@ img {
   text-align: center;
   color: #a7abae;
   letter-spacing: 4px;
-  font-size: 1.4rem;
+  font-size: 1.6rem;
 }
 
 .client-card {
@@ -376,14 +403,11 @@ img {
 .client-card__avatar {
   width: 70px;
   border-radius: 50%;
-  margin-bottom: 30px;
 }
 .client-card__txt {
-  max-width: 440px;
-  font-size: 0.9em;
+  max-width: 350px;
   color: #5a636c;
-  margin: auto;
-  margin-bottom: 30px;
+  margin: 30px auto;
 }
 .client-card__name {
   font-family: "Fraunces", serif;
@@ -412,7 +436,7 @@ img {
   margin-bottom: 30px;
 }
 .footer .local-nav {
-  margin-bottom: 50px;
+  margin-bottom: 60px;
 }
 
 .local-nav__menu {
@@ -420,12 +444,10 @@ img {
   justify-content: center;
 }
 .local-nav__item {
-  margin: 0 20px;
+  margin: 0 30px;
 }
 .local-nav__link {
   color: #458c7e;
-  text-decoration: none;
-  font-size: 0.9em;
   transition: color 0.5s;
 }
 .local-nav__link:hover {
@@ -434,14 +456,21 @@ img {
 
 .social__link {
   display: inline-block;
-  margin: 0 10px;
+  margin: 0 15px;
   color: #2c7566;
+  font-size: 1.3em;
   transition: color 0.5s;
 }
 .social__link:hover {
   color: white;
 }
 
+/* ---- less than 375px DEVICE ---- */
+@media screen and (max-width: 375px) {
+  .header .slogan {
+    font-size: 3.5rem;
+  }
+}
 /* ---- FOR DESKTOP ---- */
 @media screen and (min-width: 760px) {
   /* ---- header ---- */
@@ -450,19 +479,21 @@ img {
   }
 
   .header .navigation {
-    margin-bottom: 70px;
+    margin-bottom: 100px;
   }
   .header .slogan {
-    max-width: none;
-    font-size: 4.8rem;
-    margin-bottom: 80px;
+    font-size: 5rem;
+  }
+
+  .navigation .logo {
+    width: 150px;
   }
   .navigation .hamburger {
     display: none;
   }
   .navigation .global-nav {
-    position: static;
     display: block;
+    position: static;
     width: auto;
     background-color: transparent;
   }
@@ -479,7 +510,6 @@ img {
   }
   .global-nav__link {
     color: white;
-    font-size: 0.9em;
     transition: background-color 0.5s, color 0.5s;
   }
   .global-nav__link--current {
@@ -503,30 +533,33 @@ img {
   .feature-card__content {
     text-align: left;
     place-self: center;
+    padding: 50px 30px;
+    max-height: 500px;
+    overflow: auto;
   }
-  .feature-card__heading {
-    font-family: "Fraunces", serif;
-    font-weight: 900;
-    font-size: 3.2rem;
-    color: #23303e;
-    line-height: 1.2;
+  .feature-card__content::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    background-color: #f5f5f5;
+  }
+  .feature-card__content::-webkit-scrollbar {
+    width: 12px;
+    background-color: #f5f5f5;
+  }
+  .feature-card__content::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: #555;
   }
   .feature-card__txt {
-    max-width: 420px;
-    font-size: 0.9em;
-  }
-  .feature-card__link::after {
-    transition: opacity 0.5s;
-  }
-  .feature-card__link:hover::after {
-    opacity: 1;
+    max-width: 460px;
   }
   .feature-card__pic {
     width: 100%;
     height: 100%;
   }
 
-  .service {
+  .service-card-container {
     display: grid;
     grid-template-columns: 1fr 1fr;
   }
@@ -540,25 +573,32 @@ img {
 
   /* ---- testimonials ---- */
   .testimonials {
-    padding: 9.2105263158%;
+    padding: 140px 80px;
   }
 
-  .client {
+  .client-card-container {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    -moz-column-gap: 4.8387096774%;
-    column-gap: 4.8387096774%;
+    -moz-column-gap: 30px;
+    column-gap: 30px;
   }
 
   .client-card {
-    text-align: center;
-    padding-top: 80px;
+    padding-top: 70px;
+  }
+
+  .client-card__txt {
+    margin: 50px auto;
   }
 
   /* ---- gallery ---- */
   .gallery {
-    display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+
+  /* ---- footer ---- */
+  .footer .logo {
+    width: 150px;
   }
 }
 

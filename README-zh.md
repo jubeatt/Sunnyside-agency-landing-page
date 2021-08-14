@@ -63,61 +63,81 @@ JS 的部分，你可以自己選擇要不要完成。
 
 #### SVG 跟 iconfont 是不一樣的東西
 
+#### SVG 改大小
+
+直接選取 class，設定`width`
+
 #### SVG 改顏色的方式
 
 去裡面找到`fill`屬性來修改。
 
+#### nth-child 跟 nth-type 的差異
+
+共通點：兩者選取的都是標籤，不是 class
+
+nth-child：同階層中的所有標籤
+nth-of-type：同階層中的相同標籤
+
+#### 什麼時候該設%
+
+- 希望隨著寬度有變化的流動區塊。
+
+- 文字間的 margin，padding 通常不需要設，不然當寬度越大的時候，文字或元素之間的間距也會跟著變得很大，所以自己做斟酌。
+
+- 有些區塊的 padding，一樣，如果四個邊都有設 padding，那就要考慮到，當寬度越寬的時候，這個區塊的內容就會越往裡面推，如果`內容本身不會跟著變大的話`，那差距就會越來越大。
+
+- 希望寬度/高度會隨著視窗增加的時候，或許就需要設%
+
+#### design 的部分使用桌機版的圖片能得到比較好的效果
+
+#### 文字的部分建議
+
+可以善用 `max-width / max-height` 來限制，避免太大或太小時，影響到整個區塊的寬度或高度。
+例如：design 的部分如果文字太多，讓整體區塊太高，背景圖片的顯示就會跟著影響。
+所以這邊使用了`max-width / max-height` 來限制，並且利用`overflow`來讓內容真的比較多時產生滾軸，解決內容比較多的需求。
+
+#### 發現設計稿置中失敗
+
+testimonails 片段的名稱與頭像。
+
 ## 特色
 
-我希望這個 `card` 組件能夠有一些自定義的功能，所以讓我們再添加一點原始碼吧！
+### 不限字數的內容
+
+藉由`max-height`與`overflow`來實現。
 
 ```scss
-// optional style
-.card--normal-cyan {
-  background-color: $normal-cyan;
-  color: $normal-cyan;
-}
-// optional style
-.card--dark-cyan {
-  background-color: $dark-cyan;
-  color: $dark-cyan;
+&content {
+  text-align: left;
+  place-self: center;
+  padding: 50px 30px;
+  max-height: 400px;
+  overflow: auto;
 }
 ```
 
-這樣子就能把喜歡的顏色套用到 `card` 囉。
-
-來點不一樣的吧，讓我們來加個粉紅色 ✨
+### 自定義 scrollbar
 
 ```scss
-$pink: #ffbcbc;
+&::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  background-color: #f5f5f5;
+}
 
-.card--pink {
-  background-color: $pink;
-  color: $pink;
+&::-webkit-scrollbar {
+  width: 12px;
+  background-color: #f5f5f5;
+}
+
+&::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #555;
 }
 ```
 
-💡 別忘了在 HTML 中加入新建立的 class
-
-```html
-<section class="card card--pink"></section>
-```
-
-完工：
-
-![feature](README-img/feature.jpg)
-
-我知道你可能也注意到了，就是圖片的部分沒有隨著設定的顏色來做變化。
-
-不過別擔心，這是因為我們使用的是**圖片檔**，如果你改使用 **icon-font**（像是 [FontAwesome](https://fontawesome.com/)） ，就能解決這個問題囉。
-
-做個簡單的示範：
-
-![icon](README-img/icon.jpg)
-
-總而言之，如果你還希望有什麼功能，只要試著去鑽研，相信都能找出解決辦法的。
-
-最後就留給各位自行發揮囉！
+**來源：**[css3-webkit-vertical-scrollbars](https://cssdeck.com/labs/css3-webkit-vertical-scrollbars)
 
 ## 關於作者
 

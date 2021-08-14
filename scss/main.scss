@@ -28,7 +28,7 @@ $white-opacity: rgba(255, 255, 255, 30%);
 /* ---- font ---- */
 $primary-font-size: 1.8rem;
 $heading-line-height: 1.2;
-$text-line-height: 1.5;
+$text-line-height: 1.7;
 $primary-font-color: $dark-grayish-blue;
 $primary-font-family: 'Barlow', sans-serif;
 $secondary-font-family: 'Fraunces', serif;
@@ -39,6 +39,7 @@ $secondary-font-weight-bold: 900;
 /* ---- base ---- */
 html {
   font-size: 62.5%;
+  scroll-behavior: smooth;
 }
 body {
   font-size: $primary-font-size;
@@ -50,6 +51,10 @@ body {
 img {
   vertical-align: middle;
   max-width: 100%;
+}
+
+a {
+  text-decoration: none;
 }
 
 /* ---- common ---- */
@@ -66,11 +71,13 @@ img {
 /* ---- header ---- */
 .header {
   background-image: url('../images/mobile/image-header.jpg');
+  background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
   height: 100vh;
   padding: 30px;
   text-align: center;
+  position: relative;
 }
 
 .header {
@@ -78,27 +85,49 @@ img {
     margin-bottom: 130px;
   }
   .slogan {
-    max-width: 520px;
     font-family: $secondary-font-family;
     font-weight: $secondary-font-weight-bold;
-    font-size: 4.1rem;
+    font-size: 4.4rem;
     color: $white;
     line-height: $heading-line-height;
     letter-spacing: 5px;
-    margin: auto;
-    margin-bottom: 130px;
   }
   .arrow {
-    display: inline-block;
-    padding: 30px;
-    -webkit-animation-name: down;
-    animation-name: down;
-    -webkit-animation-duration: 1s;
-    animation-duration: 1s;
-    -webkit-animation-iteration-count: infinite;
-    animation-iteration-count: infinite;
-    -webkit-animation-direction: alternate;
-    animation-direction: alternate;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 100px;
+    height: 250px;
+    transform: translateX(-50%);
+    .pic {
+      -webkit-animation-name: down;
+      animation-name: down;
+      -webkit-animation-duration: 1s;
+      animation-duration: 1s;
+      -webkit-animation-iteration-count: infinite;
+      animation-iteration-count: infinite;
+      -webkit-animation-direction: alternate;
+      animation-direction: alternate;
+    }
+  }
+}
+
+// animation for arrow
+@-webkit-keyframes down {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(106px);
+  }
+}
+
+@keyframes down {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(106px);
   }
 }
 
@@ -122,7 +151,7 @@ img {
     &::after {
       position: absolute;
       content: '';
-      top: -20px;
+      top: -19px;
       right: 0;
       width: 0;
       height: 0;
@@ -133,35 +162,16 @@ img {
   }
 }
 
-@-webkit-keyframes down {
-  0% {
-    transform: translateY(0);
-  }
-  100% {
-    transform: translateY(150px);
-  }
-}
-
-@keyframes down {
-  0% {
-    transform: translateY(0);
-  }
-  100% {
-    transform: translateY(150px);
-  }
-}
-
 // component-global-nav
 .global-nav__ {
   &menu {
-    padding: 30px 0;
+    padding: 20px 0;
   }
   &item {
-    margin-bottom: 15px;
+    margin: 15px 0;
   }
   &link {
     display: inline-block;
-    text-decoration: none;
     color: $dark-grayish-blue;
     padding: 15px 30px;
     border-radius: 100px;
@@ -179,9 +189,9 @@ img {
 // component-feature-card
 .feature-card__ {
   &content {
+    text-align: center;
     padding: 13.3333333333% 8%;
     // padding: 50px 30px;
-    text-align: center;
   }
   &pic {
     width: 100%;
@@ -196,17 +206,16 @@ img {
     // margin-bottom: 30px;
   }
   &txt {
-    font-size: 0.9em;
     margin-bottom: 9.52380952381%;
     // margin-bottom: 30px;
   }
   &link {
     display: inline-block;
-    text-decoration: none;
     font-family: $secondary-font-family;
     font-weight: $secondary-font-weight-bold;
     color: $very-dark-desaturated-blue;
     position: relative;
+    line-height: 1.6;
 
     &::after {
       content: '';
@@ -216,10 +225,13 @@ img {
       z-index: -1;
       display: block;
       width: calc(100% + 16px);
-      padding: 0 10px;
       border-radius: 100px;
       height: 10px;
       opacity: 0.2;
+      transition: opacity 0.5s;
+    }
+    &:hover::after {
+      opacity: 1;
     }
   }
   &link--yellow {
@@ -236,35 +248,50 @@ img {
 
 // component-service-card
 .service-card {
-  // height: 100vh;
-  // padding: 0 30px 50px;
   padding: 400px 30px 50px;
-  // padding: 106.666666667% 8% 13.3333333333%;
   text-align: center;
-  font-size: 0.8em;
 
   .heading {
     font-family: $secondary-font-family;
     font-weight: $secondary-font-weight-bold;
-    line-height: 1;
     font-size: 3rem;
-    // margin-bottom: 9.52380952381%;
     margin-bottom: 30px;
   }
   .txt {
     margin-left: auto;
     margin-right: auto;
-    max-width: 320px;
+    max-width: 380px;
+    max-height: 180px;
+    overflow: auto;
+
+    &::-webkit-scrollbar-track {
+      -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+      border-radius: 10px;
+      background-color: transparent;
+    }
+
+    &::-webkit-scrollbar {
+      width: 12px;
+      background-color: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      border-radius: 10px;
+      -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+      background-color: #555;
+    }
   }
 
   &--design {
-    background-image: url('../images/mobile/image-graphic-design.jpg');
+    background-image: url('../images/desktop/image-graphic-design.jpg');
+    background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
     color: $primary-desaturated-cyan;
   }
   &--photography {
-    background-image: url('../images/mobile/image-photography.jpg');
+    background-image: url('../images/desktop/image-photography.jpg');
+    background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
     color: $primary-dark-blue;
@@ -282,7 +309,7 @@ img {
     text-align: center;
     color: $grayish-blue;
     letter-spacing: 4px;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
   }
 }
 
@@ -290,7 +317,6 @@ img {
 
 .client-card {
   text-align: center;
-  // padding-top: 16.9491525424%;
   padding-top: 50px;
 }
 
@@ -298,22 +324,16 @@ img {
   &avatar {
     width: 70px;
     border-radius: 50%;
-    // margin-bottom: 10.1694915254%;
-    margin-bottom: 30px;
   }
   &txt {
-    max-width: 440px;
-    font-size: 0.9em;
+    max-width: 350px;
     color: $very-dark-grayish-blue;
-    margin: auto;
-    // margin-bottom: 10.1694915254%;
-    margin-bottom: 30px;
+    margin: 30px auto;
   }
   &name {
     font-family: $secondary-font-family;
     font-weight: $secondary-font-weight-bold;
     color: $very-dark-desaturated-blue;
-    // margin-bottom: 3.38983050847%;
     margin-bottom: 10px;
   }
   &occupation {
@@ -331,17 +351,14 @@ img {
 
 /* ---- footer ---- */
 .footer {
-  // padding: 16% 10.6666666667%;
   padding: 60px 40px;
   background-color: $primary-dark-moderate-cyan;
   text-align: center;
   .logo {
-    // margin-bottom: 8%;
     margin-bottom: 30px;
   }
   .local-nav {
-    // margin-bottom: 13.3333333333%;
-    margin-bottom: 50px;
+    margin-bottom: 60px;
   }
 }
 
@@ -352,12 +369,10 @@ img {
     justify-content: center;
   }
   &item {
-    margin: 0 20px;
+    margin: 0 30px;
   }
   &link {
     color: $primary-dark-moderate-cyan-keep;
-    text-decoration: none;
-    font-size: 0.9em;
     transition: color 0.5s;
     &:hover {
       color: $white;
@@ -370,8 +385,9 @@ img {
   // clear white space
   &link {
     display: inline-block;
-    margin: 0 10px;
+    margin: 0 15px;
     color: #2c7566;
+    font-size: 1.3em;
     transition: color 0.5s;
     &:hover {
       color: $white;
@@ -379,8 +395,16 @@ img {
   }
 }
 
-/* ---- FOR DESKTOP ---- */
+/* ---- less than 375px DEVICE ---- */
+@media screen and (max-width: 375px) {
+  .header {
+    .slogan {
+      font-size: 3.5rem;
+    }
+  }
+}
 
+/* ---- FOR DESKTOP ---- */
 @media screen and (min-width: 760px) {
   /* ---- header ---- */
   .header {
@@ -389,26 +413,27 @@ img {
 
   .header {
     .navigation {
-      margin-bottom: 70px;
+      margin-bottom: 100px;
     }
     .slogan {
-      max-width: none;
-      font-size: 4.8rem;
-      margin-bottom: 80px;
-    }
-    .arrow {
+      font-size: 5rem;
     }
   }
 
   .navigation {
+    .logo {
+      width: 150px;
+    }
     .hamburger {
       display: none;
     }
     .global-nav {
-      position: static;
       display: block;
+      position: static;
       width: auto;
       background-color: transparent;
+
+      // triangle
       &::after {
         display: none;
       }
@@ -426,7 +451,6 @@ img {
     }
     &link {
       color: $white;
-      font-size: 0.9em;
       transition: background-color 0.5s, color 0.5s;
       &--current {
         color: $very-dark-desaturated-blue;
@@ -458,27 +482,28 @@ img {
     &content {
       text-align: left;
       place-self: center;
-    }
-    &heading {
-      font-family: $secondary-font-family;
-      font-weight: $secondary-font-weight-bold;
-      font-size: 3.2rem;
-      color: $very-dark-desaturated-blue;
-      line-height: $heading-line-height;
-      // margin-bottom: 30px;
+      padding: 50px 30px;
+      max-height: 500px;
+      overflow: auto;
+      &::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+        border-radius: 10px;
+        background-color: #f5f5f5;
+      }
+
+      &::-webkit-scrollbar {
+        width: 12px;
+        background-color: #f5f5f5;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+        background-color: #555;
+      }
     }
     &txt {
-      max-width: 420px;
-      font-size: 0.9em;
-      // margin-bottom: 30px;
-    }
-    &link {
-      &::after {
-        transition: opacity 0.5s;
-      }
-      &:hover::after {
-        opacity: 1;
-      }
+      max-width: 460px;
     }
     &pic {
       width: 100%;
@@ -486,11 +511,13 @@ img {
     }
   }
 
-  // component-service-card
-  .service {
+  // service-card-container
+  .service-card-container {
     display: grid;
     grid-template-columns: 1fr 1fr;
   }
+
+  // component-service-card
   .service-card {
     &--design {
       background-image: url('../images/desktop/image-graphic-design.jpg');
@@ -503,26 +530,34 @@ img {
   /* ---- testimonials ---- */
 
   .testimonials {
-    padding: 9.21052631579%;
-    // padding-top: 100px;
+    padding: 140px 80px;
   }
 
   // component-client-card
-  .client {
+  .client-card-container {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    -moz-column-gap: 4.83870967742%;
-    column-gap: 4.83870967742%;
+    -moz-column-gap: 30px;
+    column-gap: 30px;
   }
   .client-card {
-    text-align: center;
-    padding-top: 80px;
+    padding-top: 70px;
+  }
+  .client-card__ {
+    &txt {
+      margin: 50px auto;
+    }
   }
 
   /* ---- gallery ---- */
-
   .gallery {
-    display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+
+  /* ---- footer ---- */
+  .footer {
+    .logo {
+      width: 150px;
+    }
   }
 }

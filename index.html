@@ -36,8 +36,6 @@
 <body>
 
 
-
-
   <!-- layout-header -->
   <header class="header">
 
@@ -45,16 +43,13 @@
     <!-- block-navigation -->
     <div class="navigation">
       <!-- block-logo -->
-      <a
-        class="logo"
-        href="index.html"
-      >
+      <a href="index.html">
         <img
+          class="logo"
           src="images/logo.svg"
           alt="sunnyside"
         >
       </a>
-
       <!-- block-hamburger -->
       <button
         class="hamburger"
@@ -102,9 +97,12 @@
     <!-- block-arrow -->
     <a
       class="arrow"
-      href="#"
+      href="#feature"
     >
-      <img src="images/icon-arrow-down.svg">
+      <img
+        class="pic"
+        src="images/icon-arrow-down.svg"
+      >
     </a>
 
 
@@ -112,12 +110,13 @@
 
   <main class="main">
     <h1 class="hide">sunnyside</h1>
-
-
-
     <!-- layout-feature -->
-    <section class="feature">
+    <section
+      class="feature"
+      id="feature"
+    >
       <h2 class="hide">Feature</h2>
+
 
 
       <!-- component-feature-card -->
@@ -143,8 +142,10 @@
             href="#"
           >LEARN MORE</a>
         </div>
-
       </div>
+
+
+
 
 
       <!-- component-feature-card-->
@@ -174,9 +175,9 @@
       </div>
 
 
-
-      <div class="service">
-        <!-- component-service-card-brief -->
+      <!-- service-card-container -->
+      <div class="service-card-container">
+        <!-- component-service-card -->
         <div class="service-card service-card--design">
           <h3 class="heading">Graphic Design</h3>
           <p class="txt">
@@ -184,7 +185,7 @@
             potential clients’ attention.
           </p>
         </div>
-        <!-- component-service-card-brief -->
+        <!-- component-service-card -->
         <div class="service-card service-card--photography">
           <h3 class="heading">Photography</h3>
           <p class="txt">
@@ -204,7 +205,8 @@
     <section class="testimonials">
       <h2 class="heading">CLIENT TESTIMONIALS</h2>
 
-      <div class="client">
+      <!-- client-card-container -->
+      <div class="client-card-container">
         <!-- component-client-card -->
         <div class="client-card">
           <img
@@ -244,10 +246,8 @@
           <h4 class="client-card__name">Jennie F.</h4>
           <p class="client-card__occupation">Business Owner</p>
         </div>
+
       </div>
-
-
-
 
     </section>
   </main>
@@ -311,7 +311,7 @@
     <!-- block-logo -->
     <img
       class="logo"
-      src="images/logo-green.svg"
+      src="images/footer-logo.svg"
       alt="sunnyside"
     >
     <!-- component-local-nav -->
@@ -377,7 +377,6 @@
   <script>
     let menuBtn = document.getElementById('menuBtn')
     let menu = document.getElementById('menu')
-
 
     menuBtn.addEventListener('click', showMenu, false)
 
