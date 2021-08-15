@@ -11,11 +11,13 @@ Frontend Mentor challenges 是一個藉由實際建立專案，來提升 coding 
   - [網站連結](#連結)
 - [工作流程](#工作流程)
   - [使用的工具](#使用的工具)
+  - [架構圖](#架構圖)
 - [我學到什麼](#我學到什麼)
 - [特色](#特色)
 - [問題回報](#問題回報)
 - [關於作者](#關於作者)
 - [致謝](#致謝)
+- [參考資料](#參考資料)
 
 ## 總覽
 
@@ -55,13 +57,18 @@ Frontend Mentor challenges 是一個藉由實際建立專案，來提升 coding 
 - Semantic HTML5 markup
 - Flex-box
 - Grid-box
+- @keyframe (箭頭動畫)
 - SCSS (preprocessor)
 - BEM (methodology)
-- Vanilla JavaScript
+- Vanilla JavaScript (導覽列開關)
 - [Reset.css](https://meyerweb.com/eric/tools/css/reset/)
-- [jQuery](https://jquery.com/)
+- [jQuery](https://jquery.com/) (平滑滾軸)
 - [Google font](https://fonts.google.com/)
-- [Font Awesome](https://fontawesome.com/v5/changelog/latest)
+- [Font Awesome](https://fontawesome.com/v5/changelog/latest) (社群圖示)
+
+### 架構圖
+
+![structure](README-img/structure.jpg)
 
 ## 我學到什麼
 
@@ -266,7 +273,7 @@ svg path {
 
 - 關於文字或區塊之間的 `margin`，`padding` 則要視情況，如果設為%，則當寬度越大的時候，文字或區塊之間的間距也會跟著逐漸變大，所以這部分要自己斟酌。
 
-- 有些區塊的 `padding`，一樣，如果四個邊都有設 `padding`，那就要考慮到，當寬度越寬的時候，這個區塊的內容就會越往裡面推，所以要考慮**內容本身會不會隨著寬度增加而變大**？如果內容本身不會跟著變大的話，那差距就會越來越大。
+- 有些區塊的 `padding`，一樣，如果四個邊都有設 `padding`，那就要考慮到，當寬度越寬的時候，這個區塊的內容就會越往裡面推，所以要考慮**內容本身會不會隨著寬度增加而變大**？如果不會，那差距就隨著寬度會越來越大。
 
 - 如果希望一個區塊的`width`, `height`會隨著視窗增加的時候，或許就需要設%。
 
@@ -290,7 +297,7 @@ svg path {
 
 ### 不限字數的內容
 
-我在部分的內容區塊使用了`max-height`與`overflow`，讓文字內容可以不必有最大字數限制。
+我在部分的內容區塊使用了`max-height`與`overflow`，所以即便內容較多也不用擔心。
 
 ![feature-01](README-img/feature-01.gif)
 
@@ -309,30 +316,82 @@ svg path {
 
 ![feature-02](README-img/feature-02.jpg)
 
-<font size="2">⚠ 註：此方法僅適用於 Webkit 瀏覽器（Chrome or Safari），若有跨瀏覽器的需求，建議使用 JavaScript。</font>
+<font size="2">⚠ 注意：此方法僅適用於 Webkit 瀏覽器（Chrome or Safari），若有跨瀏覽器的需求，建議使用 JavaScript。</font>
 
 原始碼：
 
 ```scss
 &::-webkit-scrollbar-track {
-  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
   border-radius: 10px;
-  background-color: #f5f5f5;
+  background-color: transparent;
 }
 
 &::-webkit-scrollbar {
-  width: 12px;
-  background-color: #f5f5f5;
+  width: 8px;
+  background-color: transparent;
 }
 
 &::-webkit-scrollbar-thumb {
   border-radius: 10px;
-  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
   background-color: #555;
 }
 ```
 
 如果想了解更多的話，你也可以參考這個[網站](https://cssdeck.com/labs/css3-webkit-vertical-scrollbars)
+
+### 平滑滾軸效果
+
+![smooth-scroll](README-img/smooth-scroll.gif)
+
+如果想簡單快速的話，可以直接使用 CSS 中的`scroll-behavior: smooth`這個屬性，如下：
+
+```scss
+html {
+  scroll-behavior: smooth;
+}
+```
+
+<font size="2">⚠ 注意：此方法不適用於 Safari 及 IE</font>
+
+如果要考慮瀏覽器的支援度的話，建議還是使用 JavaScript 來實作會比較穩固。
+
+這邊是搭配 jQuery 來使用，因為 jQuery 在處理動畫的部分會比較輕鬆一些，不過如果你想要用原生 JavaScript 也不是不行？（只要有愛就沒問題了？😂）
+
+原始碼：
+
+```javascript
+// get element
+let arrowBtn = $('.arrow')
+// except the "logo" anchor and the "arrow" anchor
+let link = $('a[href="#"]:not(".arrow")')
+
+// event binding
+arrowBtn.on('click', function (e) {
+  // send event object to the function
+  scrollToFeatureSection(e)
+})
+link.on('click', function (e) {
+  // send event object to the function
+  scrollToTop(e)
+})
+
+// smooth scrolling
+function scrollToTop(e) {
+  // prevent default action of <a>
+  e.preventDefault()
+  // move to top
+  $('html, body').stop().animate({ scrollTop: 0 }, 800)
+}
+
+function scrollToFeatureSection(e) {
+  // prevent default action of <a>
+  e.preventDefault()
+  // get position of the feature section
+  let target = document.getElementById('feature').offsetTop
+  // move to the position
+  $('html, body').stop().animate({ scrollTop: target }, 800)
+}
+```
 
 ## 問題回報
 
@@ -359,6 +418,18 @@ svg path {
 - Facebook - [薛裕正](https://www.facebook.com/profile.php?id=100003593580513)
 
 ## 致謝
+
+最後，先向每一位看完這份 README 的你致謝，畢竟寫這份 README 其實也花了我不少時間，所以很謝謝你們願意花時間來閱讀。
+
+如果你從中學習到了一些新的知識，那對我會感到非常開心。
+
+當然，如果你有發現錯誤或是有其他更好的建議，也很歡迎給我回饋，你可以[寄信](mailto:jimdevelopesite@gmail.com)給我，或者聯絡我都可以。
+
+最後還是要向 Front Mentor 的作者謝謝，在這裡我學到的並不單單只是一些切版的練習，還學習到了很多跟前端相關的知識。
+
+雖然這只僅僅是我的第三個挑戰，但收穫遠比我預期中來得還要更多更多。
+
+學習前端的這條路也許還很長，但我會持續堅持下去，也希望未來能夠陸續的把其他想做的挑戰一個一個給完成。
 
 ## 參考資料
 
