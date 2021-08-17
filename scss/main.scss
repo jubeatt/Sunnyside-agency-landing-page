@@ -74,6 +74,9 @@ $width-pc: 760px;
   margin-left: auto;
   margin-right: auto;
 }
+%toUpperCase {
+  text-transform: uppercase;
+}
 
 /* ---- base ---- */
 html {
@@ -135,6 +138,7 @@ a {
     color: $white;
     line-height: $heading-line-height;
     letter-spacing: 5px;
+    @extend %toUpperCase;
 
     @include mediaQuery-xs-sm {
       font-size: 2.8rem;
@@ -274,6 +278,7 @@ a {
       font-weight: $secondary-font-weight-normal;
       background-color: $primary-yellow;
       color: $black;
+      @extend %toUpperCase;
       @include mediaQuery-pc {
         color: $very-dark-desaturated-blue;
         background-color: $white;
@@ -368,6 +373,7 @@ a {
     color: $very-dark-desaturated-blue;
     position: relative;
     line-height: 1.6;
+    @extend %toUpperCase;
 
     &::after {
       content: '';
@@ -468,6 +474,7 @@ a {
     color: $grayish-blue;
     letter-spacing: 4px;
     font-size: 1.6rem;
+    @extend %toUpperCase;
   }
 }
 

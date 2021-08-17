@@ -105,7 +105,8 @@ header,
 hgroup,
 menu,
 nav,
-section {
+section,
+main {
   display: block;
 }
 
@@ -151,6 +152,10 @@ table {
 .service-card .txt {
   margin-left: auto;
   margin-right: auto;
+}
+
+.testimonials .heading, .feature-card__link, .global-nav__link--current, .header .slogan {
+  text-transform: uppercase;
 }
 
 /* ---- base ---- */
