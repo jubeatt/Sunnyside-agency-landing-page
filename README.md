@@ -444,7 +444,7 @@ I'll be delighted if you get some new techniques from here.
 
 Of course, always feel free to give me feedback if you found anything wrong or you have any suggestions.
 
-You can send an [mail](mailto:jimdevelopesite@gmail.com) to me or just contact me directly.
+You can send a [mail](mailto:jimdevelopesite@gmail.com) to me or just contact me directly.
 
 In the end, I still thank the author who creates Front Mentor, It's not only the web design and practicing I learned from here but also learned much relative knowledge of front-end.
 
@@ -456,5 +456,5 @@ Maybe it's a long way to go on the front-end, but I'll keep going on this, and I
 
 [css3-webkit-vertical-scrollbars](https://cssdeck.com/labs/css3-webkit-vertical-scrollbars)  
 [BEM by Example](https://sparkbox.com/foundry/bem_by_example)  
-[Why You Should Use Picture Tag Instead of Img Tag](https://blog.bitsrc.io/why-you-should-use-picture-tag-instead-of-img-tag-b9841e86bf8b)
+[Why You Should Use Picture Tag Instead of Img Tag](https://blog.bitsrc.io/why-you-should-use-picture-tag-instead-of-img-tag-b9841e86bf8b)  
 [object-fit | CSS-Tricks](https://css-tricks.com/almanac/properties/o/object-fit/)
