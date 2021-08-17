@@ -1,3 +1,4 @@
+/* ---- files ---- */
 @import 'reset.scss';
 
 /* ---- google font ---- */
@@ -36,6 +37,44 @@ $primary-font-weight: 600;
 $secondary-font-weight-normal: 700;
 $secondary-font-weight-bold: 900;
 
+/* ---- breakpoint ---- */
+$width-xs-sm: 375px;
+$width-pc: 760px;
+
+/* ---- @mixin ---- */
+
+// background
+@mixin background(
+  $size: cover,
+  $position-x: center,
+  $position-y: center,
+  $repeat: no-repeat
+) {
+  background-size: $size;
+  background-position: $position-x $position-y;
+  background-repeat: $repeat;
+  @content;
+}
+
+// media query
+@mixin mediaQuery-xs-sm {
+  @media screen and (max-width: $width-xs-sm) {
+    @content;
+  }
+}
+
+@mixin mediaQuery-pc {
+  @media screen and (min-width: $width-pc) {
+    @content;
+  }
+}
+
+/* ---- extend ---- */
+%margin-center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
 /* ---- base ---- */
 html {
   font-size: 62.5%;
@@ -70,19 +109,24 @@ a {
 
 /* ---- header ---- */
 .header {
-  background-image: url('../images/mobile/image-header.jpg');
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center center;
   height: 100vh;
   padding: 30px;
   text-align: center;
   position: relative;
+  @include background {
+    background-image: url('../images/mobile/image-header.jpg');
+  }
+  @include mediaQuery-pc {
+    background-image: url('../images/desktop/image-header.jpg');
+  }
 }
 
 .header {
   .navigation {
     margin-bottom: 130px;
+    @include mediaQuery-pc {
+      margin-bottom: 100px;
+    }
   }
   .slogan {
     font-family: $secondary-font-family;
@@ -91,6 +135,14 @@ a {
     color: $white;
     line-height: $heading-line-height;
     letter-spacing: 5px;
+
+    @include mediaQuery-xs-sm {
+      font-size: 2.8rem;
+    }
+
+    @include mediaQuery-pc {
+      font-size: 5rem;
+    }
   }
   .arrow {
     position: absolute;
@@ -136,11 +188,21 @@ a {
   justify-content: space-between;
   align-items: center;
   position: relative;
+
+  @include mediaQuery-pc {
+    .logo {
+      width: 150px;
+    }
+  }
   .hamburger {
     cursor: pointer;
     background-color: transparent;
     border: none;
     padding: 0;
+
+    @include mediaQuery-pc {
+      display: none;
+    }
   }
   .global-nav {
     display: none;
@@ -148,6 +210,14 @@ a {
     top: 70px;
     width: 100%;
     background-color: #fff;
+
+    @include mediaQuery-pc {
+      display: block;
+      position: static;
+      width: auto;
+      background-color: transparent;
+    }
+
     &::after {
       position: absolute;
       content: '';
@@ -158,6 +228,10 @@ a {
       border-style: solid;
       border-width: 0 0 20px 20px;
       border-color: transparent transparent #ffffff transparent;
+
+      @include mediaQuery-pc {
+        display: none;
+      }
     }
   }
 }
@@ -166,25 +240,64 @@ a {
 .global-nav__ {
   &menu {
     padding: 20px 0;
+
+    @include mediaQuery-pc {
+      padding: 0;
+      display: flex;
+    }
   }
   &item {
     margin: 15px 0;
+
+    @include mediaQuery-pc {
+      margin: 0 10px;
+    }
   }
   &link {
     display: inline-block;
     color: $dark-grayish-blue;
     padding: 15px 30px;
     border-radius: 100px;
+    @include mediaQuery-pc {
+      color: $white;
+      transition: background-color 0.5s, color 0.5s;
+    }
+
     &--current {
       font-family: $secondary-font-family;
       font-weight: $secondary-font-weight-normal;
       background-color: $primary-yellow;
       color: $black;
+      @include mediaQuery-pc {
+        color: $very-dark-desaturated-blue;
+        background-color: $white;
+      }
+    }
+    @include mediaQuery-pc {
+      &:hover {
+        background-color: $white-opacity;
+        color: $white;
+      }
     }
   }
 }
 
 /* ---- feature ---- */
+
+@include mediaQuery-pc {
+  .feature-card {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    &:nth-of-type(odd) {
+      .feature-card__ {
+        &content {
+          order: -1;
+        }
+      }
+    }
+  }
+}
 
 // component-feature-card
 .feature-card__ {
@@ -192,9 +305,38 @@ a {
     text-align: center;
     padding: 13.3333333333% 8%;
     // padding: 50px 30px;
+
+    @include mediaQuery-pc {
+      text-align: left;
+      place-self: center;
+      padding: 50px 30px;
+      max-height: 500px;
+      overflow: auto;
+      &::-webkit-scrollbar-track {
+        border-radius: 10px;
+        background-color: transparent;
+      }
+
+      &::-webkit-scrollbar {
+        width: 8px;
+        background-color: transparent;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        background-color: #555;
+      }
+    }
   }
   &pic {
     width: 100%;
+
+    @include mediaQuery-pc {
+      width: 100%;
+      height: 100%;
+      -o-object-fit: contain;
+      object-fit: cover;
+    }
   }
   &heading {
     font-family: $secondary-font-family;
@@ -208,6 +350,10 @@ a {
   &txt {
     margin-bottom: 9.52380952381%;
     // margin-bottom: 30px;
+
+    @include mediaQuery-pc {
+      max-width: 460px;
+    }
   }
   &link {
     display: inline-block;
@@ -247,6 +393,14 @@ a {
 }
 
 // component-service-card
+
+@include mediaQuery-pc {
+  .service-card-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
 .service-card {
   padding: 400px 30px 50px;
   text-align: center;
@@ -258,8 +412,7 @@ a {
     margin-bottom: 30px;
   }
   .txt {
-    margin-left: auto;
-    margin-right: auto;
+    @extend %margin-center;
     max-width: 380px;
     max-height: 180px;
     overflow: auto;
@@ -281,17 +434,15 @@ a {
   }
 
   &--design {
-    background-image: url('../images/desktop/image-graphic-design.jpg');
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
     color: $primary-desaturated-cyan;
+    @include background {
+      background-image: url('../images/desktop/image-graphic-design.jpg');
+    }
   }
   &--photography {
-    background-image: url('../images/desktop/image-photography.jpg');
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
+    @include background {
+      background-image: url('../images/desktop/image-photography.jpg');
+    }
     color: $primary-dark-blue;
   }
 }
@@ -301,6 +452,9 @@ a {
 .testimonials {
   // padding: 13.3333333333% 10.6666666667%;
   padding: 50px 40px;
+  @include mediaQuery-pc {
+    padding: 140px 80px;
+  }
   .heading {
     font-family: $secondary-font-family;
     font-weight: $secondary-font-weight-bold;
@@ -313,9 +467,22 @@ a {
 
 // component-client-card
 
+@include mediaQuery-pc {
+  .client-card-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    -moz-column-gap: 30px;
+    column-gap: 30px;
+  }
+}
+
 .client-card {
   text-align: center;
   padding-top: 50px;
+
+  @include mediaQuery-pc {
+    padding-top: 70px;
+  }
 }
 
 .client-card__ {
@@ -327,6 +494,9 @@ a {
     max-width: 350px;
     color: $very-dark-grayish-blue;
     margin: 30px auto;
+    @include mediaQuery-pc {
+      margin: 50px auto;
+    }
   }
   &name {
     font-family: $secondary-font-family;
@@ -345,6 +515,9 @@ a {
 .gallery {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  @include mediaQuery-pc {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
 }
 
 /* ---- footer ---- */
@@ -354,6 +527,9 @@ a {
   text-align: center;
   .logo {
     margin-bottom: 30px;
+    @include mediaQuery-pc {
+      width: 150px;
+    }
   }
   .local-nav {
     margin-bottom: 60px;
@@ -368,6 +544,9 @@ a {
   }
   &item {
     margin: 0 30px;
+    @include mediaQuery-xs-sm {
+      margin: 0 10px;
+    }
   }
   &link {
     color: $primary-dark-moderate-cyan-keep;
@@ -387,173 +566,13 @@ a {
     color: #2c7566;
     font-size: 1.3em;
     transition: color 0.5s;
+
+    @include mediaQuery-xs-sm {
+      font-size: 1em;
+    }
+
     &:hover {
       color: $white;
-    }
-  }
-}
-
-/* ---- less than 375px DEVICE ---- */
-@media screen and (max-width: 375px) {
-  .header {
-    .slogan {
-      font-size: 3.5rem;
-    }
-  }
-}
-
-/* ---- FOR DESKTOP ---- */
-@media screen and (min-width: 760px) {
-  /* ---- header ---- */
-  .header {
-    background-image: url('../images/desktop/image-header.jpg');
-  }
-
-  .header {
-    .navigation {
-      margin-bottom: 100px;
-    }
-    .slogan {
-      font-size: 5rem;
-    }
-  }
-
-  .navigation {
-    .logo {
-      width: 150px;
-    }
-    .hamburger {
-      display: none;
-    }
-    .global-nav {
-      display: block;
-      position: static;
-      width: auto;
-      background-color: transparent;
-
-      // triangle
-      &::after {
-        display: none;
-      }
-    }
-  }
-
-  // component-global-nav
-  .global-nav__ {
-    &menu {
-      padding: 0;
-      display: flex;
-    }
-    &item {
-      margin: 0 10px;
-    }
-    &link {
-      color: $white;
-      transition: background-color 0.5s, color 0.5s;
-      &--current {
-        color: $very-dark-desaturated-blue;
-        background-color: $white;
-      }
-      &:hover {
-        background-color: $white-opacity;
-        color: $white;
-      }
-    }
-  }
-
-  /* ---- feature ---- */
-  .feature-card {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-
-    &:nth-of-type(odd) {
-      .feature-card__ {
-        &content {
-          order: -1;
-        }
-      }
-    }
-  }
-
-  // component-feature-card
-  .feature-card__ {
-    &content {
-      text-align: left;
-      place-self: center;
-      padding: 50px 30px;
-      max-height: 500px;
-      overflow: auto;
-      &::-webkit-scrollbar-track {
-        border-radius: 10px;
-        background-color: transparent;
-      }
-
-      &::-webkit-scrollbar {
-        width: 8px;
-        background-color: transparent;
-      }
-
-      &::-webkit-scrollbar-thumb {
-        border-radius: 10px;
-        background-color: #555;
-      }
-    }
-    &txt {
-      max-width: 460px;
-    }
-    &pic {
-      width: 100%;
-      height: 100%;
-    }
-  }
-
-  // service-card-container
-  .service-card-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-  }
-
-  // component-service-card
-  .service-card {
-    &--design {
-      background-image: url('../images/desktop/image-graphic-design.jpg');
-    }
-    &--photography {
-      background-image: url('../images/desktop/image-photography.jpg');
-    }
-  }
-
-  /* ---- testimonials ---- */
-
-  .testimonials {
-    padding: 140px 80px;
-  }
-
-  // component-client-card
-  .client-card-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    -moz-column-gap: 30px;
-    column-gap: 30px;
-  }
-  .client-card {
-    padding-top: 70px;
-  }
-  .client-card__ {
-    &txt {
-      margin: 50px auto;
-    }
-  }
-
-  /* ---- gallery ---- */
-  .gallery {
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-  }
-
-  /* ---- footer ---- */
-  .footer {
-    .logo {
-      width: 150px;
     }
   }
 }

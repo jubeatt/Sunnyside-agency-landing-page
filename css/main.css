@@ -1,3 +1,4 @@
+/* ---- files ---- */
 /* http://meyerweb.com/eric/tools/css/reset/ 
    v2.0 | 20110126
    License: none (public domain)
@@ -144,6 +145,14 @@ table {
 /* ---- google font ---- */
 /* ---- color ---- */
 /* ---- font ---- */
+/* ---- breakpoint ---- */
+/* ---- @mixin ---- */
+/* ---- extend ---- */
+.service-card .txt {
+  margin-left: auto;
+  margin-right: auto;
+}
+
 /* ---- base ---- */
 html {
   font-size: 62.5%;
@@ -179,18 +188,28 @@ a {
 
 /* ---- header ---- */
 .header {
-  background-image: url("../images/mobile/image-header.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center center;
   height: 100vh;
   padding: 30px;
   text-align: center;
   position: relative;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-image: url("../images/mobile/image-header.jpg");
+}
+@media screen and (min-width: 760px) {
+  .header {
+    background-image: url("../images/desktop/image-header.jpg");
+  }
 }
 
 .header .navigation {
   margin-bottom: 130px;
+}
+@media screen and (min-width: 760px) {
+  .header .navigation {
+    margin-bottom: 100px;
+  }
 }
 .header .slogan {
   font-family: "Fraunces", serif;
@@ -199,6 +218,16 @@ a {
   color: white;
   line-height: 1.2;
   letter-spacing: 5px;
+}
+@media screen and (max-width: 375px) {
+  .header .slogan {
+    font-size: 2.8rem;
+  }
+}
+@media screen and (min-width: 760px) {
+  .header .slogan {
+    font-size: 5rem;
+  }
 }
 .header .arrow {
   position: absolute;
@@ -241,11 +270,21 @@ a {
   align-items: center;
   position: relative;
 }
+@media screen and (min-width: 760px) {
+  .navigation .logo {
+    width: 150px;
+  }
+}
 .navigation .hamburger {
   cursor: pointer;
   background-color: transparent;
   border: none;
   padding: 0;
+}
+@media screen and (min-width: 760px) {
+  .navigation .hamburger {
+    display: none;
+  }
 }
 .navigation .global-nav {
   display: none;
@@ -253,6 +292,14 @@ a {
   top: 70px;
   width: 100%;
   background-color: #fff;
+}
+@media screen and (min-width: 760px) {
+  .navigation .global-nav {
+    display: block;
+    position: static;
+    width: auto;
+    background-color: transparent;
+  }
 }
 .navigation .global-nav::after {
   position: absolute;
@@ -265,12 +312,28 @@ a {
   border-width: 0 0 20px 20px;
   border-color: transparent transparent #ffffff transparent;
 }
+@media screen and (min-width: 760px) {
+  .navigation .global-nav::after {
+    display: none;
+  }
+}
 
 .global-nav__menu {
   padding: 20px 0;
 }
+@media screen and (min-width: 760px) {
+  .global-nav__menu {
+    padding: 0;
+    display: flex;
+  }
+}
 .global-nav__item {
   margin: 15px 0;
+}
+@media screen and (min-width: 760px) {
+  .global-nav__item {
+    margin: 0 10px;
+  }
 }
 .global-nav__link {
   display: inline-block;
@@ -278,20 +341,76 @@ a {
   padding: 15px 30px;
   border-radius: 100px;
 }
+@media screen and (min-width: 760px) {
+  .global-nav__link {
+    color: white;
+    transition: background-color 0.5s, color 0.5s;
+  }
+}
 .global-nav__link--current {
   font-family: "Fraunces", serif;
   font-weight: 700;
   background-color: #fad400;
   color: #000;
 }
+@media screen and (min-width: 760px) {
+  .global-nav__link--current {
+    color: #23303e;
+    background-color: white;
+  }
+}
+@media screen and (min-width: 760px) {
+  .global-nav__link:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    color: white;
+  }
+}
 
 /* ---- feature ---- */
+@media screen and (min-width: 760px) {
+  .feature-card {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .feature-card:nth-of-type(odd) .feature-card__content {
+    order: -1;
+  }
+}
 .feature-card__content {
   text-align: center;
   padding: 13.3333333333% 8%;
 }
+@media screen and (min-width: 760px) {
+  .feature-card__content {
+    text-align: left;
+    place-self: center;
+    padding: 50px 30px;
+    max-height: 500px;
+    overflow: auto;
+  }
+  .feature-card__content::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background-color: transparent;
+  }
+  .feature-card__content::-webkit-scrollbar {
+    width: 8px;
+    background-color: transparent;
+  }
+  .feature-card__content::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: #555;
+  }
+}
 .feature-card__pic {
   width: 100%;
+}
+@media screen and (min-width: 760px) {
+  .feature-card__pic {
+    width: 100%;
+    height: 100%;
+    -o-object-fit: contain;
+    object-fit: cover;
+  }
 }
 .feature-card__heading {
   font-family: "Fraunces", serif;
@@ -303,6 +422,11 @@ a {
 }
 .feature-card__txt {
   margin-bottom: 9.5238095238%;
+}
+@media screen and (min-width: 760px) {
+  .feature-card__txt {
+    max-width: 460px;
+  }
 }
 .feature-card__link {
   display: inline-block;
@@ -335,6 +459,12 @@ a {
   background-color: #fe7867;
 }
 
+@media screen and (min-width: 760px) {
+  .service-card-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+}
 .service-card {
   padding: 400px 30px 50px;
   text-align: center;
@@ -346,8 +476,6 @@ a {
   margin-bottom: 30px;
 }
 .service-card .txt {
-  margin-left: auto;
-  margin-right: auto;
   max-width: 380px;
   max-height: 180px;
   overflow: auto;
@@ -365,23 +493,28 @@ a {
   background-color: #555;
 }
 .service-card--design {
-  background-image: url("../images/desktop/image-graphic-design.jpg");
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
   color: #25564b;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-image: url("../images/desktop/image-graphic-design.jpg");
 }
 .service-card--photography {
-  background-image: url("../images/desktop/image-photography.jpg");
-  background-repeat: no-repeat;
-  background-position: center center;
   background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-image: url("../images/desktop/image-photography.jpg");
   color: #19536b;
 }
 
 /* ---- testimonials ---- */
 .testimonials {
   padding: 50px 40px;
+}
+@media screen and (min-width: 760px) {
+  .testimonials {
+    padding: 140px 80px;
+  }
 }
 .testimonials .heading {
   font-family: "Fraunces", serif;
@@ -392,9 +525,22 @@ a {
   font-size: 1.6rem;
 }
 
+@media screen and (min-width: 760px) {
+  .client-card-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    -moz-column-gap: 30px;
+    column-gap: 30px;
+  }
+}
 .client-card {
   text-align: center;
   padding-top: 50px;
+}
+@media screen and (min-width: 760px) {
+  .client-card {
+    padding-top: 70px;
+  }
 }
 
 .client-card__avatar {
@@ -405,6 +551,11 @@ a {
   max-width: 350px;
   color: #5a636c;
   margin: 30px auto;
+}
+@media screen and (min-width: 760px) {
+  .client-card__txt {
+    margin: 50px auto;
+  }
 }
 .client-card__name {
   font-family: "Fraunces", serif;
@@ -422,6 +573,11 @@ a {
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
+@media screen and (min-width: 760px) {
+  .gallery {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+}
 
 /* ---- footer ---- */
 .footer {
@@ -431,6 +587,11 @@ a {
 }
 .footer .logo {
   margin-bottom: 30px;
+}
+@media screen and (min-width: 760px) {
+  .footer .logo {
+    width: 150px;
+  }
 }
 .footer .local-nav {
   margin-bottom: 60px;
@@ -442,6 +603,11 @@ a {
 }
 .local-nav__item {
   margin: 0 30px;
+}
+@media screen and (max-width: 375px) {
+  .local-nav__item {
+    margin: 0 10px;
+  }
 }
 .local-nav__link {
   color: #458c7e;
@@ -458,143 +624,13 @@ a {
   font-size: 1.3em;
   transition: color 0.5s;
 }
+@media screen and (max-width: 375px) {
+  .social__link {
+    font-size: 1em;
+  }
+}
 .social__link:hover {
   color: white;
-}
-
-/* ---- less than 375px DEVICE ---- */
-@media screen and (max-width: 375px) {
-  .header .slogan {
-    font-size: 3.5rem;
-  }
-}
-/* ---- FOR DESKTOP ---- */
-@media screen and (min-width: 760px) {
-  /* ---- header ---- */
-  .header {
-    background-image: url("../images/desktop/image-header.jpg");
-  }
-
-  .header .navigation {
-    margin-bottom: 100px;
-  }
-  .header .slogan {
-    font-size: 5rem;
-  }
-
-  .navigation .logo {
-    width: 150px;
-  }
-  .navigation .hamburger {
-    display: none;
-  }
-  .navigation .global-nav {
-    display: block;
-    position: static;
-    width: auto;
-    background-color: transparent;
-  }
-  .navigation .global-nav::after {
-    display: none;
-  }
-
-  .global-nav__menu {
-    padding: 0;
-    display: flex;
-  }
-  .global-nav__item {
-    margin: 0 10px;
-  }
-  .global-nav__link {
-    color: white;
-    transition: background-color 0.5s, color 0.5s;
-  }
-  .global-nav__link--current {
-    color: #23303e;
-    background-color: white;
-  }
-  .global-nav__link:hover {
-    background-color: rgba(255, 255, 255, 0.3);
-    color: white;
-  }
-
-  /* ---- feature ---- */
-  .feature-card {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-  }
-  .feature-card:nth-of-type(odd) .feature-card__content {
-    order: -1;
-  }
-
-  .feature-card__content {
-    text-align: left;
-    place-self: center;
-    padding: 50px 30px;
-    max-height: 500px;
-    overflow: auto;
-  }
-  .feature-card__content::-webkit-scrollbar-track {
-    border-radius: 10px;
-    background-color: transparent;
-  }
-  .feature-card__content::-webkit-scrollbar {
-    width: 8px;
-    background-color: transparent;
-  }
-  .feature-card__content::-webkit-scrollbar-thumb {
-    border-radius: 10px;
-    background-color: #555;
-  }
-  .feature-card__txt {
-    max-width: 460px;
-  }
-  .feature-card__pic {
-    width: 100%;
-    height: 100%;
-  }
-
-  .service-card-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .service-card--design {
-    background-image: url("../images/desktop/image-graphic-design.jpg");
-  }
-  .service-card--photography {
-    background-image: url("../images/desktop/image-photography.jpg");
-  }
-
-  /* ---- testimonials ---- */
-  .testimonials {
-    padding: 140px 80px;
-  }
-
-  .client-card-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    -moz-column-gap: 30px;
-    column-gap: 30px;
-  }
-
-  .client-card {
-    padding-top: 70px;
-  }
-
-  .client-card__txt {
-    margin: 50px auto;
-  }
-
-  /* ---- gallery ---- */
-  .gallery {
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-  }
-
-  /* ---- footer ---- */
-  .footer .logo {
-    width: 150px;
-  }
 }
 
 /*# sourceMappingURL=main.css.map */

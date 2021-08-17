@@ -1,116 +1,120 @@
-# Frontend Mentor - Sunnyside agency landing page
+# Frontend Mentor - Sunnyside agency landing page solution
 
-這是來自[Sunnyside agency landing page challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/sunnyside-agency-landing-page-7yVs3B6ef)的解答。  
-Frontend Mentor challenges 是一個藉由實際建立專案，來提升 coding 技術的挑戰。
+This is a solution to the [Sunnyside agency landing page challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/sunnyside-agency-landing-page-7yVs3B6ef). Frontend Mentor challenges help you improve your coding skills by building realistic projects.
 
-## 大綱
+**<font size="4">友情提示：如果你想看中文解說，可以點[這裡](https://github.com/jubeatt/Sunnyside-agency-landing-page/blob/master/README-zh.md)🎉</font>**
 
-- [總覽](#總覽)
-  - [關於這份挑戰](#關於這份挑戰)
-  - [螢幕截圖](#螢幕截圖)
-  - [網站連結](#連結)
-- [工作流程](#工作流程)
-  - [使用的工具](#使用的工具)
-  - [架構圖](#架構圖)
-- [我學到什麼](#我學到什麼)
-- [特色](#特色)
-- [問題回報](#問題回報)
-- [關於作者](#關於作者)
-- [致謝](#致謝)
-- [參考資料](#參考資料)
+## Table of contents
 
-## 總覽
+- [Overview](#overview)
+  - [The challenge](#the-challenge)
+  - [Screenshot](#screenshot)
+  - [Links](#links)
+- [My process](#my-process)
+  - [Built with](#built-with)
+  - [structural drawing](#structural-drawing)
+- [What I learned](#what-i-learned)
+- [Features](#features)
+- [Issue Report](#issue-report)
+- [Author](#author)
+- [Acknowledgments](#acknowledgments)
+- [Resources](#resources)
 
-### 關於這份挑戰
+## Overview
 
-你的挑戰是建立出這個引導頁面（langing page），盡你所能的讓它能夠看起來越接近設計稿越好。
+### The challenge
 
-這個挑戰主要聚焦在 HTML 和 CSS，以及一小部分的 JS（手機板的導覽區塊）。  
-關於 JS 的部分，你可以自己選擇是否要完成。
+Your challenge is to build this landing page and get it looking as close to the design as possible.
 
-你可以使用任何你喜歡的工具來完成這份挑戰。所以如果你有某個你想要練習的工具，就盡管去嘗試吧！
+This challenge focuses on HTML & CSS, and a little bit of JavaScript.
 
-提示－你的使用者應該要能夠：
+About JS, you can choose to do it or not, depending on yourself.
 
-- 在他們裝置上得到最佳化的佈局
-- 從互動式元件上獲得 "互動（interactive）" 的效果 <font size="2">（連結按鈕）</font>
+You can use any tools you like to help you complete the challenge. So if you've got something you'd like to practice, feel free to give it a go.
 
-### 螢幕截圖
+Users should be able to:
 
-**🖥 桌機版：**
+- View the optimal layout for the site depending on their device's screen size
+- See hover states for all interactive elements on the page
+
+### Screenshot
+
+**🖥 Desktop：**
 
 ![src-desktop](README-img/screenshot-desktop.jpg)
 
-**📱 手機版：**
+**📱 Mobile：**
 
 ![src-desktop](README-img/screenshot-mobile.jpg)
 
-### 連結
+### Links
 
 - Live Site URL: [Here](https://jubeatt.github.io/Sunnyside-agency-landing-page/)🥑
 
-## 工作流程
+## My process
 
-### 使用的工具
+### Built with
 
 - Mobile-first workflow
 - Semantic HTML5 markup
 - Flex-box
 - Grid-box
-- @keyframe (箭頭動畫)
+- @keyframe (animation for the arrow)
 - SCSS (preprocessor)
 - BEM (methodology)
-- Vanilla JavaScript (導覽列開關)
+- Vanilla JavaScript (navigation on the mobile)
 - [Reset.css](https://meyerweb.com/eric/tools/css/reset/)
-- [jQuery](https://jquery.com/) (平滑滾軸)
+- [jQuery](https://jquery.com/) (smooth scroll)
 - [Google font](https://fonts.google.com/)
-- [Font Awesome](https://fontawesome.com/v5/changelog/latest) (社群圖示)
+- [Font Awesome](https://fontawesome.com/v5/changelog/latest) (social-icon)
 
-### 架構圖
+### Structural drawing
 
 ![structure](README-img/structure.jpg)
 
-## 我學到什麼
+## What I learned
 
-### 關於 BEM 的 class 結構
+### Regarding the classes structure of BEM
 
-- **複雜的巢狀結構**
+- **Complex nested structure**
 
-這裡引用來自[BEM by Example](https://sparkbox.com/foundry/bem_by_example)的一段敘述：
+Let's quote some statements from [BEM by Example](https://sparkbox.com/foundry/bem_by_example)：
 
 > If your component has child elements several levels deep, don’t try to represent each level in the class name. BEM is not intended to communicate structural depth. A BEM class name representing a child element in the component should only include the base/block name and the one element name.
 
-意思是說，假使一個 component 下有多個層級的子元素，我們也不必在 BEM 把每一層的結構寫出來，譬如說：
+As the statements saying, If we have several levels of child elements in a component, we should not try to write them in a BEM class name, for example:
 
 ```html
 <figure class="photo">
   <img class="photo__img" src="image.jpg" />
   <figcaption class="photo__caption">
-    圖片解說
+    description of the photo
     <blockquote class="photo__caption__quote">
-      不要在一個class裡面放一個以上的element
+      Don't include more than one child element in a class name
     </blockquote>
   </figcaption>
 </figure>
 ```
 
-所以一個`Block`下最多只會寫一層`Element`：
+So there should be only one `Element` under a `Block`.
 
 ```html
 <figure class="photo">
   <img class="photo__img" src="image.jpg" />
   <figcaption class="photo__caption">
-    圖片解說
-    <blockquote class="photo__quote">這樣就對了</blockquote>
+    description of the photo
+    <blockquote class="photo__quote">That's it!</blockquote>
   </figcaption>
 </figure>
 ```
 
-即便你沒有把每一個層級都寫出來，也能夠看出`img`, `caption`, `quote`都是`photo`這個 component 下的元素，所以判斷的時候只要掌握一個原則：**這個元素是哪個 component 下的元素**，就能寫出簡潔清楚的 class 名稱。
+Even if you didn't write out each level of the strucrute, you can still know the `img`, `caption`, `photo` are the elements of this component.
 
-- **有些元素不需要綁在 Block 上**
+So when you are naming your class name, you can think about this: **which component should the element belong to?**, follow this rule and get a clear class name.
 
-拿這個挑戰中的`header`部分來舉例：
+- **you don't have to follow the rules of BEM in each case**
+
+Take the `header` part in this challenge to make an example:
 
 ```html
 <header class="header">
@@ -119,7 +123,7 @@ Frontend Mentor challenges 是一個藉由實際建立專案，來提升 coding 
 </header>
 ```
 
-`slogan`跟`arrow`這兩個元素其實都能獨自存在，並沒有一定要綁在`header`這個`Block`上（除非你把整個`header`當成是一個 component），所以就不建議這樣子寫：
+In this case, `slogan` and `arrow` are not a dependency of the `header`, they can be existed by themself. (unless you regard `header` as a component), so it does not recommend to write like this:
 
 ```html
 <header class="header">
@@ -128,13 +132,13 @@ Frontend Mentor challenges 是一個藉由實際建立專案，來提升 coding 
 </header>
 ```
 
-這種情況大多會發生在文字的部分，所以這種時候就建議寫一個方便識別的 class 就好，不用一定要照著 BEM 的規則來命名。
+It usually happens on the text part, so just need to write a Recognizable class name, there's no need to follow the rule every time.
 
-### picture 標籤的運用
+### Use &lt;picture&gt; tag
 
-要製作響應式圖片，並不是只能透過`media query`來實現，也可以使用 HTML 中的`<picture>`。
+`media query` is not the only way to make an image responsive, you can also use a `<picture>` of HTML.
 
-譬如，在這個挑戰中的圖片就能這樣使用：
+for example, in this challenge we can use that:
 
 ```html
 <picture>
@@ -146,26 +150,24 @@ Frontend Mentor challenges 是一個藉由實際建立專案，來提升 coding 
 </picture>
 ```
 
-瀏覽器會先從`<source>`找尋有沒有匹配條件的圖片，如果沒有的話（或瀏覽器不支援`<picture>`）就會使用`<img>`所設定的圖片。
+The browser will look for the first match images from the `<source>` at first, if there are no images match or the browser doesn't support `<picture>`, it will apply the image from `<img>`.
 
-補充：
+Tips:
 
-- `<source>`可以有很多個。
-- `<img>`一定要寫在最後面，寫在`<img>`後面的`<source>`都會被省略。
+- you can use more than one `<source>` to separate different images
+- Remember always set `<img>` in the last, because it will ignore every `<source>` behind it.
 
-更多詳細的內容可以參考：[這裡](https://www.fooish.com/html/picture-tag.html)
+More detail: [here](https://blog.bitsrc.io/why-you-should-use-picture-tag-instead-of-img-tag-b9841e86bf8b)
 
-### SVG 的相關設定
+### Some setting of SVG
 
-由於我以前沒用過 SVG 來設定圖片，所以不太清楚 SVG 的一些設定該怎麼調整，這裡會把我碰到的問題列出來。
+Because I didn't use SVG to set images before, so I'm not familiar on how to decorate it.
 
-拿挑戰中的這個 SVG 來舉例：
+Here are the problems and solutions that I met:
 
-![svg-change-size](images/footer-logo.svg)
+- **Change the size of SVG**
 
-- **改變 SVG 的尺寸**
-
-只要用 CSS 直接去選取這個 SVG 來做設定即可：
+Just select it and set it by using CSS:
 
 ```html
 <img class="logo" src="logo.svg" />
@@ -177,15 +179,15 @@ Frontend Mentor challenges 是一個藉由實際建立專案，來提升 coding 
 }
 ```
 
-- **改變 SVG 的顏色**
+- **Change the color of SVG**
 
-我目前知道的做法有兩種：
+There are two ways that I currently know can do it:
 
-1. 直接去修改 svg 檔案中的 `fill` 屬性值。
+1. Change the attribute value of `fill` from the SVG file directly.
 
 ![svg-change-color](README-img/svg-change-color.jpg)
 
-2. 把 svg 檔案寫入 HTML 中，再透過 CSS 來調整`fill`的屬性值。
+2. Write the SVG content into HTML first, and then change the attribute value of `fill` by CSS.
 
 ```html
 <svg width="124" height="24" xmlns="http://www.w3.org/2000/svg">
@@ -203,15 +205,15 @@ svg path {
 }
 ```
 
-### nth-child 跟 nth-of-type 的差異
+### The difference between nth-child and nth-of-type
 
-為了做出這個效果：
+In order to do this:
 
 ![reverse](README-img/reverse.jpg)
 
-這裡的想法是去修改**第奇數個項目的元素**，所以會需要用到`nth-child`或`nth-of-type`來實作。
+My first idea is to modify **the odd number of elements**, so it will need to use `nth-child` or `nth-of-type` to achieve it.
 
-不過在我的案例中，只能用`nth-of-type`來實作，因為我的 HTML 長這樣：
+But in my case, it can only use `nth-of-type` to do it, because my HTML looks like this:
 
 ```html
 <section class="feature" id="feature">
@@ -219,20 +221,20 @@ svg path {
 
   <!-- component-feature-card-->
   <div class="feature-card">
-    <!-- 以下省略 -->
+    <!-- Omission -->
   </div>
 
   <div class="feature-card">
-    <!-- 以下省略 -->
+    <!-- Omission -->
   </div>
 
   <div class="feature-card">
-    <!-- 以下省略 -->
+    <!-- Omission -->
   </div>
 </section>
 ```
 
-如果我這樣子寫：
+If I write CSS like this:
 
 ```scss
 .feature-card:nth-child(odd) {
@@ -240,11 +242,11 @@ svg path {
 }
 ```
 
-實際會選取到的是：
+Actually, The elements were selected from the selector will be :
 
 ![nth-child](README-img/nth-child.jpg)
 
-但如果是：
+But if it is:
 
 ```scss
 .feature-card:nth-of-type(odd) {
@@ -252,56 +254,71 @@ svg path {
 }
 ```
 
-實際會選取到的是：
+The result will be:
 
 ![nth-of-type](README-img/nth-of-type.jpg)
 
-有一個很重要的地方是，不管是`nth-child`還是`nth-of-type`，**兩者都是從同階層中的標籤來做選取，不是 class**。
+The main point is no matter `nth-child` or `nth-of-type`, both are based on their position in a group of siblings. so **the group includes whole siblings of tags, not just the class names**.
 
-而這兩者唯一的差異在於：
+And the difference between them is:
 
-- nth-child：同階層中的**所有標籤**
-- nth-of-type：同階層中的**相同標籤**
+- `nth-child`: Regardless of type(HTML tag)
+- `nth-of-type`: Particular type(HTML tag)
 
-所以下次在使用時要特別注意同階層中的標籤關係。
+Next time when you use these pseudo-class selectors, be sure you know what's the difference between them and which one you should use.
 
-### 什麼時候該把單位設為%
+### What case should I use % unit?
 
-由於自己做響應式網站的經驗還不算多，所以會分不太清楚什麼時候該使用相對單位，什麼時候該使用絕對單位比較適合，以下是我完成這份挑戰後得出的一些心得：
+Sometimes I would be mess up by using absolute units or relative units since my experience of creating RWD is not very much.
 
-- 通常會隨著寬度來做改變的區塊，應該要將其`width`設為%。
+So here are some Experiences I learned after I finished this challenge:
 
-- 關於文字或區塊之間的 `margin`，`padding` 則要視情況，如果設為%，則當寬度越大的時候，文字或區塊之間的間距也會跟著逐漸變大，所以這部分要自己斟酌。
+- If a block should be fluid with the width, its `width` should be set by %.
 
-- 有些區塊的 `padding`，一樣，如果四個邊都有設 `padding`，那就要考慮到，當寬度越寬的時候，這個區塊的內容就會越往裡面推，所以要考慮**內容本身會不會隨著寬度增加而變大**？如果不會，那差距就隨著寬度會越來越大。
+- Regarding the `margin`, `padding` between the texts or blocks, it depends on your goal.  
+  If you set % for them. when the `width` becomes larger, the spacing between them will be also increased, so I think there is no right answer to answer this question, it all depends on the end goal.
 
-- 如果希望一個區塊的`width`, `height`會隨著視窗增加的時候，或許就需要設%。
+- Some blocks may have the same `padding` from each side, in this case, you need to know one thing.  
+  when the `width` is increasing, the content inside the block will get more close to the inside.  
+   so you can think about this: **Is The content get larger by itself when the width is increased?** If the answer is NO, the spacing between the content and the block will be larger.
 
-### 更具彈性化的文字設定
+### Make the text content more flexible
 
-可以善用 `max-width / max-height` 來限制文字的最大或最小寬度，來避免當區塊太大或太小時，降低文字的美觀與可讀性，或者是反過來，過多的文字影響到整個區塊的寬度或高度。
+You can make good use of `max-width` / `max-height` to limit the size of the text area. It can prevent your text look too long or too short when the block is very big or small. or in the reverse case, the text influence the block, make the block looks too big.
 
-範例一：
+example1:
 
-<font size="2">💡 註：圖片是在寬度`759px`擷取的（手機板的最大寬度）</font>
+<font size="2">💡 remark：This picture was taken by `759px` width. (the Maximum of the mobile version)</font>
 
 ![max-width](README-img/max-width.jpg)
 
-範例二：
+example2:
 
-<font size="2">💡 註：圖片是在寬度`759px`擷取的（手機板的最大寬度）</font>
+<font size="2">💡 remark：This picture was taken by `759px` width. (the Maximum of the mobile version)</font>
 
 ![max-height](README-img/max-height.jpg)
 
-## 特色
+### Use object-fit to prevent your picture get deformation
 
-### 不限字數的內容
+No chit-chat, let's just see a picture:
 
-我在部分的內容區塊使用了`max-height`與`overflow`，所以即便內容較多也不用擔心。
+<font size="2">💡 remark：This picture was taken by `765px` width.</font>
+
+![object-fit](README-img/object-fit.gif)
+
+`object-fit` is a new property of CSS3, to see more usage click [here](https://css-tricks.com/almanac/properties/o/object-fit/).
+
+<font size="2">⚠ Warning：IE doesn't support this property</font>
+
+## Features
+
+### No limit content
+
+I use `max-height` and `overflow` for some parts of the content block, so even you have a lot of content, it still looks fine, no need to worry about it.
 
 ![feature-01](README-img/feature-01.gif)
 
-原始碼：
+Code:
 
 ```scss
 &content {
@@ -310,15 +327,15 @@ svg path {
 }
 ```
 
-### 自定義 scrollbar
+### Customize scrollbar
 
-瀏覽器預設的滾軸似乎不是那麼好看（我覺得啦 😅），所以這部分其實也能透過 CSS 來設定樣式。
+The default scrollbar of the browser seems not really well (just my feeling 😅), so it actually can be changed by using CSS.
 
 ![feature-02](README-img/feature-02.jpg)
 
-<font size="2">⚠ 注意：此方法僅適用於 Webkit 瀏覽器（Chrome or Safari），若有跨瀏覽器的需求，建議使用 JavaScript。</font>
+<font size="2">⚠ Warning： This method can be only used for the WebKit browser (Chrome or Safari), so if you want to support each browser, it recommends using JavaScript.</font>
 
-原始碼：
+Code:
 
 ```scss
 &::-webkit-scrollbar-track {
@@ -337,13 +354,13 @@ svg path {
 }
 ```
 
-如果想了解更多的話，你也可以參考這個[網站](https://cssdeck.com/labs/css3-webkit-vertical-scrollbars)
+If you want learn more detail, check this [site](https://cssdeck.com/labs/css3-webkit-vertical-scrollbars).
 
-### 平滑滾軸效果
+### Smooth scroll
 
 ![smooth-scroll](README-img/smooth-scroll.gif)
 
-如果想簡單快速的話，可以直接使用 CSS 中的`scroll-behavior: smooth`這個屬性，如下：
+There's one easy way to achieve it. you can use `scroll-behavior: smooth`, which is the property of CSS, like this:
 
 ```scss
 html {
@@ -351,13 +368,13 @@ html {
 }
 ```
 
-<font size="2">⚠ 注意：此方法不適用於 Safari 及 IE</font>
+<font size="2">⚠ Warning： This method doesn't support Safari and IE.</font>
 
-如果要考慮瀏覽器的支援度的話，建議還是使用 JavaScript 來實作會比較穩固。
+Consider that the compatibility of browsers, It's more stable by using JavaScript.
 
-這邊是搭配 jQuery 來使用，因為 jQuery 在處理動畫的部分會比較輕鬆一些，不過如果你想要用原生 JavaScript 也不是不行？（只要有愛就沒問題了？😂）
+So here I using jQuery to do this since it's easier for handling the animation effect, but you can also use vanilla JavaScript if you prefer that. (As Long as There's Love, It Doesn't Matter?😂)
 
-原始碼：
+Code:
 
 ```javascript
 // get element
@@ -393,46 +410,51 @@ function scrollToFeatureSection(e) {
 }
 ```
 
-## 問題回報
+## Issue Report
 
-### 圖片使用問題
+### Regarding the images
 
-我發現在圖片設定時，手機板的圖片在約 `500px~760px` 之間的響應效果並不是很好，若改成使用桌機板的圖片能獲得較好的效果。
+I found there's a problem, when the viewport is between about `500px` to `760px`, some images seems not well on responsive effect.
 
-參考下圖：
+You can fix this problem by using desktop images instead of mobile images.
 
-<font size="2">💡 註：圖片是在寬度`759px`擷取的（手機板的最大寬度）</font>
+Check this picture:
+
+<font size="2">💡 remark：This picture was taken by `759px` width. (the Maximum of the mobile version)</font>
 
 ![report-01](README-img/report-01.jpg)
 
-### 設計稿中的小瑕疵
+### A little bit flaw of the design
 
-只是個小發現，有一部分的文字似乎沒有置中對齊 😂
+I Just found it unknowingly😂, there is some text that seems not to center align.
 
 ![report-02](README-img/report-02.jpg)
 
-## 關於作者
+## Author
 
 - Website - [Jim's blog](https://jubeatt.github.io/)
 - Frontend Mentor - [Jim](https://www.frontendmentor.io/profile/jubeatt)
 - Facebook - [薛裕正](https://www.facebook.com/profile.php?id=100003593580513)
 
-## 致謝
+## Acknowledgments
 
-最後，先向每一位看完這份 README 的你致謝，畢竟寫這份 README 其實也花了我不少時間，所以很謝謝你們願意花時間來閱讀。
+First of all, thanks to every who read this README, after all, it's took me a lot of time to finish it. So I very much appreciate that you're willing to take the time on reading this.
 
-如果你從中學習到了一些新的知識，那對我會感到非常開心。
+I'll be delighted if you get some new techniques from here.
 
-當然，如果你有發現錯誤或是有其他更好的建議，也很歡迎給我回饋，你可以[寄信](mailto:jimdevelopesite@gmail.com)給我，或者聯絡我都可以。
+Of course, always feel free to give me feedback if you found anything wrong or you have any suggestions.
 
-最後還是要向 Front Mentor 的作者謝謝，在這裡我學到的並不單單只是一些切版的練習，還學習到了很多跟前端相關的知識。
+You can send an [mail](mailto:jimdevelopesite@gmail.com) to me or just contact me directly.
 
-雖然這只僅僅是我的第三個挑戰，但收穫遠比我預期中來得還要更多更多。
+In the end, I still thank the author who creates Front Mentor, It's not only the web design and practicing I learned from here but also learned much relative knowledge of front-end.
 
-學習前端的這條路也許還很長，但我會持續堅持下去，也希望未來能夠陸續的把其他想做的挑戰一個一個給完成。
+It gives me more rewards beyond my expectations even though this is just my third challenge.
 
-## 參考資料
+Maybe it's a long way to go on the front-end, but I'll keep going on this, and I hope I can finish the challenges that I want to do in the future.
+
+## Resources
 
 [css3-webkit-vertical-scrollbars](https://cssdeck.com/labs/css3-webkit-vertical-scrollbars)  
 [BEM by Example](https://sparkbox.com/foundry/bem_by_example)  
-[HTML <picture> 響應式圖片 (Responsive Images) - 自動載入不同尺寸和檔案格式的圖片](https://www.fooish.com/html/picture-tag.html)
+[Why You Should Use Picture Tag Instead of Img Tag](https://blog.bitsrc.io/why-you-should-use-picture-tag-instead-of-img-tag-b9841e86bf8b)
+[object-fit | CSS-Tricks](https://css-tricks.com/almanac/properties/o/object-fit/)
