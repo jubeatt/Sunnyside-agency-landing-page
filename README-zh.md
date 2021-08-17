@@ -435,7 +435,7 @@ function scrollToFeatureSection(e) {
 
 最後，先向每一位看完這份 README 的你致謝，畢竟寫這份 README 其實也花了我不少時間，所以很謝謝你們願意花時間來閱讀。
 
-如果你從中學習到了一些新的知識，那對我會感到非常開心。
+如果你從中學習到了一些新的知識，那我會感到非常開心。
 
 當然，如果你有發現錯誤或是有其他更好的建議，也很歡迎給我回饋，你可以[寄信](mailto:jimdevelopesite@gmail.com)給我，或者聯絡我都可以。
 
@@ -449,5 +449,5 @@ function scrollToFeatureSection(e) {
 
 [css3-webkit-vertical-scrollbars](https://cssdeck.com/labs/css3-webkit-vertical-scrollbars)  
 [BEM by Example](https://sparkbox.com/foundry/bem_by_example)  
-[HTML <picture> 響應式圖片 (Responsive Images) - 自動載入不同尺寸和檔案格式的圖片](https://www.fooish.com/html/picture-tag.html)
+[HTML <picture> 響應式圖片 (Responsive Images) - 自動載入不同尺寸和檔案格式的圖片](https://www.fooish.com/html/picture-tag.html)  
 [CSS3 的區塊填滿設定- object-fit 與 object-position](https://tools.wingzero.tw/article/sn/61)
