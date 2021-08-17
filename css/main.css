@@ -292,6 +292,9 @@ a {
   top: 70px;
   width: 100%;
   background-color: #fff;
+  box-shadow: 0px 2px 10px -5px rgba(71, 71, 71, 0.64);
+  -webkit-box-shadow: 0px 2px 10px -5px rgba(71, 71, 71, 0.64);
+  -moz-box-shadow: 0px 2px 10px -5px rgba(71, 71, 71, 0.64);
 }
 @media screen and (min-width: 760px) {
   .navigation .global-nav {
@@ -299,6 +302,9 @@ a {
     position: static;
     width: auto;
     background-color: transparent;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
   }
 }
 .navigation .global-nav::after {

@@ -210,12 +210,18 @@ a {
     top: 70px;
     width: 100%;
     background-color: #fff;
+    box-shadow: 0px 2px 10px -5px rgb(71 71 71 / 64%);
+    -webkit-box-shadow: 0px 2px 10px -5px rgb(71 71 71 / 64%);
+    -moz-box-shadow: 0px 2px 10px -5px rgb(71 71 71 / 64%);
 
     @include mediaQuery-pc {
       display: block;
       position: static;
       width: auto;
       background-color: transparent;
+      box-shadow: none;
+      -webkit-box-shadow: none;
+      -moz-box-shadow: none;
     }
 
     &::after {
