@@ -6,9 +6,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Fraunces:wght@700;900&display=swap');
 
 /* ---- color ---- */
-// main
+// learn more underline
 $primary-red: hsl(7, 99%, 70%);
 $primary-yellow: hsl(51, 100%, 49%);
+// navigation bg
+$primary-white: #fff;
 // graphic design text
 $primary-desaturated-cyan: hsl(167, 40%, 24%);
 // photography text
@@ -127,7 +129,7 @@ a {
 }
 
 .header {
-  .navigation {
+  .global-nav {
     margin-bottom: 130px;
     @include mediaQuery-pc {
       margin-bottom: 100px;
@@ -189,39 +191,37 @@ a {
   }
 }
 
-.navigation {
+// component-global-nav
+.global-nav {
+  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  position: relative;
+}
 
-  @include mediaQuery-pc {
-    .logo {
-      width: 150px;
-    }
-  }
-  .hamburger {
+/* ---- if JavaScript is detected ---- */
+
+.js .global-nav__ {
+  // create the menu button and show out
+  &menu-btn {
+    display: block;
     cursor: pointer;
     background-color: transparent;
     border: none;
     padding: 0;
+    order: 1;
 
     @include mediaQuery-pc {
       display: none;
     }
   }
-  .global-nav {
+  // hide the menu
+  &menu {
     display: none;
-    position: absolute;
-    top: 70px;
-    width: 100%;
-    background-color: #fff;
-    box-shadow: 0px 2px 10px -5px rgb(71 71 71 / 64%);
-    -webkit-box-shadow: 0px 2px 10px -5px rgb(71 71 71 / 64%);
-    -moz-box-shadow: 0px 2px 10px -5px rgb(71 71 71 / 64%);
 
     @include mediaQuery-pc {
-      display: block;
+      display: flex;
+      padding: 0;
       position: static;
       width: auto;
       background-color: transparent;
@@ -229,7 +229,7 @@ a {
       -webkit-box-shadow: none;
       -moz-box-shadow: none;
     }
-
+    // create the triangle
     &::after {
       position: absolute;
       content: '';
@@ -245,19 +245,45 @@ a {
         display: none;
       }
     }
+
+    // for the toggleMenu()
+    &--active {
+      display: block;
+    }
   }
 }
 
-// component-global-nav
+/* ---- if JavaScript is not detected ---- */
 .global-nav__ {
-  &menu {
-    padding: 20px 0;
+  // hide the btn
+  &menu-btn {
+    display: none;
+  }
 
+  // show the menu
+  &menu {
+    position: absolute;
+    width: 100%;
+    top: 70px;
+    padding: 20px 0;
+    background-color: $primary-white;
+    box-shadow: 0px 2px 10px -5px rgb(71 71 71 / 64%);
+    -webkit-box-shadow: 0px 2px 10px -5px rgb(71 71 71 / 64%);
+    -moz-box-shadow: 0px 2px 10px -5px rgb(71 71 71 / 64%);
+
+    // reposition the menu
     @include mediaQuery-pc {
-      padding: 0;
       display: flex;
+      padding: 0;
+      position: static;
+      width: auto;
+      background-color: transparent;
+      box-shadow: none;
+      -webkit-box-shadow: none;
+      -moz-box-shadow: none;
     }
   }
+
   &item {
     margin: 15px 0;
 
@@ -281,6 +307,7 @@ a {
       background-color: $primary-yellow;
       color: $black;
       @extend %toUpperCase;
+
       @include mediaQuery-pc {
         color: $very-dark-desaturated-blue;
         background-color: $white;

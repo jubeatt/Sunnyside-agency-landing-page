@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html
+  lang="en"
+  id="html"
+>
 
 <head>
   <meta charset="UTF-8">
@@ -40,72 +43,73 @@
   <header class="header">
 
 
-    <!-- block-navigation -->
-    <div class="navigation">
-      <!-- block-logo -->
-      <a href="index.html">
-        <img
-          class="logo"
-          src="images/logo.svg"
-          alt="sunnyside"
-        >
-      </a>
-      <!-- block-hamburger -->
+    <!-- component-global-nav -->
+    <nav
+      class="global-nav"
+      role="navigation"
+    >
       <button
-        class="hamburger"
         id="menuBtn"
+        class="global-nav__menu-btn"
+        aria-expanded="false"
+        aria-controls="menu"
       >
+        <span class="hide">Menu</span>
         <img
           src="images/icon-hamburger.svg"
           alt=""
         >
       </button>
 
-      <!-- component-global-nav -->
-      <nav
-        class="global-nav"
-        id="menu"
+
+      <a
+        href="index.html"
+        aria-label="the company's logo"
       >
-        <ul class="global-nav__menu">
-          <li class="global-nav__item">
-            <a
-              class="global-nav__link"
-              href="#"
-            >About</a>
-          </li>
-          <li class="global-nav__item">
-            <a
-              class="global-nav__link"
-              href="#"
-            >Services</a>
-          </li>
-          <li class="global-nav__item">
-            <a
-              class="global-nav__link"
-              href="#"
-            >Projects</a>
-          </li>
-          <li class="global-nav__item">
-            <a
-              class="global-nav__link global-nav__link--current"
-              href="#"
-            >Contact</a>
-          </li>
-        </ul>
-      </nav>
-    </div>
+        <img
+          src="images/logo.svg"
+          alt="sunnyside"
+        >
+      </a>
+
+      <ul
+        id="menu"
+        class="global-nav__menu"
+      >
+        <li class="global-nav__item"><a
+            class="global-nav__link"
+            href="#"
+          >About</a></li>
+        <li class="global-nav__item"><a
+            class="global-nav__link"
+            href="#"
+          >Services</a></li>
+        <li class="global-nav__item"><a
+            class="global-nav__link"
+            href="#"
+          >Projects</a></li>
+        <li class="global-nav__item"><a
+            class="global-nav__link global-nav__link--current"
+            href="#"
+          >Contact</a></li>
+      </ul>
+
+
+    </nav>
 
     <!-- block-slogan -->
     <h1 class="slogan">We are creatives</h1>
-    <!-- block-arrow -->
+
+    <!-- block-to-the-feature-section-anchor -->
     <a
       class="arrow"
-      href="#"
+      href="#feature"
+      aria-label="an arrow button that can take you to the feature section"
     >
       <img
         class="pic"
         src="images/icon-arrow-down.svg"
-        alt="an arrow button can take you to the feature section"
+        alt=""
       >
     </a>
 

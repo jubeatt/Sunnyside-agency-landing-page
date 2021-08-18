@@ -210,11 +210,11 @@ a {
   }
 }
 
-.header .navigation {
+.header .global-nav {
   margin-bottom: 130px;
 }
 @media screen and (min-width: 760px) {
-  .header .navigation {
+  .header .global-nav {
     margin-bottom: 100px;
   }
 }
@@ -271,41 +271,34 @@ a {
     transform: translateY(106px);
   }
 }
-.navigation {
+.global-nav {
+  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  position: relative;
 }
-@media screen and (min-width: 760px) {
-  .navigation .logo {
-    width: 150px;
-  }
-}
-.navigation .hamburger {
+
+/* ---- if JavaScript is detected ---- */
+.js .global-nav__menu-btn {
+  display: block;
   cursor: pointer;
   background-color: transparent;
   border: none;
   padding: 0;
+  order: 1;
 }
 @media screen and (min-width: 760px) {
-  .navigation .hamburger {
+  .js .global-nav__menu-btn {
     display: none;
   }
 }
-.navigation .global-nav {
+.js .global-nav__menu {
   display: none;
-  position: absolute;
-  top: 70px;
-  width: 100%;
-  background-color: #fff;
-  box-shadow: 0px 2px 10px -5px rgba(71, 71, 71, 0.64);
-  -webkit-box-shadow: 0px 2px 10px -5px rgba(71, 71, 71, 0.64);
-  -moz-box-shadow: 0px 2px 10px -5px rgba(71, 71, 71, 0.64);
 }
 @media screen and (min-width: 760px) {
-  .navigation .global-nav {
-    display: block;
+  .js .global-nav__menu {
+    display: flex;
+    padding: 0;
     position: static;
     width: auto;
     background-color: transparent;
@@ -314,7 +307,7 @@ a {
     -moz-box-shadow: none;
   }
 }
-.navigation .global-nav::after {
+.js .global-nav__menu::after {
   position: absolute;
   content: "";
   top: -19px;
@@ -326,18 +319,38 @@ a {
   border-color: transparent transparent #ffffff transparent;
 }
 @media screen and (min-width: 760px) {
-  .navigation .global-nav::after {
+  .js .global-nav__menu::after {
     display: none;
   }
 }
+.js .global-nav__menu--active {
+  display: block;
+}
 
+/* ---- if JavaScript is not detected ---- */
+.global-nav__menu-btn {
+  display: none;
+}
 .global-nav__menu {
+  position: absolute;
+  width: 100%;
+  top: 70px;
   padding: 20px 0;
+  background-color: #fff;
+  box-shadow: 0px 2px 10px -5px rgba(71, 71, 71, 0.64);
+  -webkit-box-shadow: 0px 2px 10px -5px rgba(71, 71, 71, 0.64);
+  -moz-box-shadow: 0px 2px 10px -5px rgba(71, 71, 71, 0.64);
 }
 @media screen and (min-width: 760px) {
   .global-nav__menu {
-    padding: 0;
     display: flex;
+    padding: 0;
+    position: static;
+    width: auto;
+    background-color: transparent;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
   }
 }
 .global-nav__item {

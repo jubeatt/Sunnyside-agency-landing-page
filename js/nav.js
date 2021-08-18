@@ -1,15 +1,34 @@
 // get element
+let html = document.getElementById('html')
 let menuBtn = document.getElementById('menuBtn')
 let menu = document.getElementById('menu')
 
-// event binding
-menuBtn.addEventListener('click', showMenu, false)
+// test
+let hasJavaScript = true;
 
-// show the menu  
-function showMenu() {
-  if (getComputedStyle(menu, null).display === 'block') {
-    menu.style.display = 'none'
+
+// detect javascript
+if (hasJavaScript) {
+  html.classList.add('js')
+}
+
+
+
+// event binding
+menuBtn.addEventListener('click', toggleMenu, false)
+
+// turn on / off the menu
+function toggleMenu() {
+  // if the menu is active
+  if(menu.classList.contains('global-nav__menu--active')) {
+    // set aria-expanded of the button to false 
+    this.setAttribute('aria-expanded', 'false')
+    // open the menu
+    menu.classList.remove('global-nav__menu--active')
   } else {
-    menu.style.display = 'block'
+    // set aria-expanded of the button to true
+    this.setAttribute('aria-expanded', 'true')
+    // close the menu
+    menu.classList.add('global-nav__menu--active')
   }
 }
