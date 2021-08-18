@@ -13,6 +13,7 @@ This is a solution to the [Sunnyside agency landing page challenge on Frontend M
 - [My process](#my-process)
   - [Built with](#built-with)
   - [structural drawing](#structural-drawing)
+- [Update record](#update-record)
 - [What I learned](#what-i-learned)
 - [Features](#features)
 - [Issue Report](#issue-report)
@@ -71,6 +72,168 @@ Users should be able to:
 ### Structural drawing
 
 ![structure](README-img/structure.jpg)
+
+## Update record
+
+**2021/08/18**
+
+### Reconstruct HTML
+
+Original:
+
+```html
+<!-- layout-header -->
+<header class="header">
+  <!-- block-navigation -->
+  <div class="navigation">
+    <!-- block-logo -->
+    <a href="index.html">
+      <img class="logo" src="images/logo.svg" alt="sunnyside" />
+    </a>
+    <!-- block-hamburger -->
+    <button class="hamburger" id="menuBtn">
+      <img src="images/icon-hamburger.svg" alt="" />
+    </button>
+
+    <!-- component-global-nav -->
+    <nav class="global-nav" id="menu">
+      <ul class="global-nav__menu">
+        <!-- menu-item -->
+      </ul>
+    </nav>
+  </div>
+  <!-- omission -->
+</header>
+```
+
+Note these problems:
+
+**Regarding the `<button>`**
+
+- The `<button>` is outside the `<nav>`, It may cause a problem that is `Screen Reader` may not recognize the relation between the `<button>` and the `<nav>`. so the content may sound ambiguous.
+
+- The `<button>` doesn't include `Menu` as a text, so that the user can't understand what can the button do.
+
+- The `<button>` isn't added `aria-expanded` attribute, so that the user doesn't know current content is close or open.
+
+- The `<button>` isn't added `aria-controls` attribute, so that the user doesn't know what is controlled by the button.
+
+**Regarding the `<nav>`**
+
+- The `<nav>` doesn't set `role="navigation` attribute, so it would be a big problem for the `browser` and the `Screen Reader` that don't recognize the `<nav>` tag.
+
+- The original JavaScript controls the `<nav>` to open/close the navigation menu, so when `<nav>` is closed The `Screen Reader` can't scan the `<nav>`, so the user wouldn't know the website have the navigation function.
+
+We will reconstruct the structure of HTML aim at those problems, as the following code:
+
+```html
+<!-- layout-header -->
+<header class="header">
+  <!-- component-global-nav -->
+  <nav class="global-nav" role="navigation">
+    <!-- block-menu-button -->
+    <button
+      id="menuBtn"
+      class="global-nav__menu-btn"
+      aria-expanded="false"
+      aria-controls="menu"
+    >
+      <span class="hide">Menu</span>
+      <img src="images/icon-hamburger.svg" alt="" />
+    </button>
+
+    <a href="index.html" aria-label="the company's logo">
+      <img src="images/logo.svg" alt="sunnyside" />
+    </a>
+
+    <!-- block-menu -->
+    <ul id="menu" class="global-nav__menu">
+      <!-- menu-item -->
+    </ul>
+  </nav>
+
+  <!-- omission -->
+</header>
+```
+
+Let's check the problems again:
+
+**Regarding the `<button>`**
+
+- The `<button>` is inside the `<nav>` now, so the `Screen Reader` could recognize the relation between the `<button>` and the `<nav>` properly.
+
+- The `<button>` includes `Menu` as a text now, so the user knows this button is used for the menu clearly.
+
+- The `<button>` is added `aria-expanded` attribute, so the user can know the menu is close or open now.
+
+- The `<button>` is added `aria-controls` attribute, so the user can know the button is used to control the menu now.
+
+**Regarding the `<nav>`**
+
+- The `<nav>` set `role="navigation` attribute, so even the `browser` and the `Screen Reader` don't recognize the `<nav>` tag, they can still understand this is navigation by the `role` attribute.
+
+- We rewrite the JavaScript too, now it controls the `<ul>` to open/close the navigation instead `<nav>`, so no need to worry about the `landmark` problems, Also, it controls the `aria-expanded` of the `<button>`, the status will be updated with open/close synchronously.
+
+Here is a simple demo:
+
+<font size="2">💡 Remark： Note that the `<ul>` is controled，and the `aria-expanded` of the `<button>` will be changed at the same time.</font>
+
+![update-demo](README-img/update-demo.gif)
+
+If you're curious how it works, check the following:
+
+```javascript
+// get element
+let menuBtn = document.getElementById('menuBtn')
+let menu = document.getElementById('menu')
+
+// event binding
+menuBtn.addEventListener('click', toggleMenu, false)
+
+// turn on / off the menu
+function toggleMenu() {
+  // if the menu is active
+  if (menu.classList.contains('global-nav__menu--active')) {
+    // set aria-expanded of the button to false
+    this.setAttribute('aria-expanded', 'false')
+    // open the menu
+    menu.classList.remove('global-nav__menu--active')
+  } else {
+    // set aria-expanded of the button to true
+    this.setAttribute('aria-expanded', 'true')
+    // close the menu
+    menu.classList.add('global-nav__menu--active')
+  }
+}
+```
+
+### Progressive enhancement design
+
+To make sure that the user can get a stable experience when their CSS, JavaScript are not working. progressive enhancement design may be a great choice, so I try to use that in this design.
+
+Let's see what we have done:
+
+**HTML only**
+
+![no-css](README-img/no-css.jpg)
+
+- Before use progressive enhancement, the user would only see a `☰` of the `<button>`
+
+- After use progressive enhancement, the user could see a `menu` text of the `<button>`.
+
+**HTML, CSS**
+
+![no-js](README-img/no-js.jpg)
+
+- Before use progressive enhancement, the user would only see a `☰` of the `<button>`, but now the JavaScript is not working, that means the `☰` doesn't have any function, so the user can't navigate anything.
+
+- After use progressive enhancement, the user would see the whole menu directly. (This part can be improved by design, make it looks better and make sense. but at least our user can navigate to the place they want to go now.)
+
+**HTML, CSS, JavaScript**
+
+![all-enabled](README-img/all-enabled.gif)
+
+When everything is ready, just the same of our final design, the user would see a good scene, and the button is functioning do it work to make the naviation close/open.
 
 ## What I learned
 
@@ -429,6 +592,14 @@ Check this picture:
 I Just found it unknowingly😂, there is some text that seems not to center align.
 
 ![report-02](README-img/report-02.jpg)
+
+### The background-color of the footer section
+
+It seems that the `style-guide.md` didn't provide the color for the footer section (If it just I miss that please tell me.😂).
+
+So if you need it :`hsl(168, 34%, 41%)`
+
+Also, you can install this [plug-in](https://chrome.google.com/webstore/detail/colorpick-eyedropper/ohcpnigalekghcmgcdcenkpelffpdolg) from google, with that next time you encounter the same problem, you can use the eyedropper tool to check the color code.
 
 ## Author
 

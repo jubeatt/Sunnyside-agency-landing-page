@@ -12,6 +12,7 @@ Frontend Mentor challenges 是一個藉由實際建立專案，來提升 coding 
 - [工作流程](#工作流程)
   - [使用的工具](#使用的工具)
   - [架構圖](#架構圖)
+- [更新紀錄](#更新紀錄)
 - [我學到什麼](#我學到什麼)
 - [特色](#特色)
 - [問題回報](#問題回報)
@@ -69,6 +70,170 @@ Frontend Mentor challenges 是一個藉由實際建立專案，來提升 coding 
 ### 架構圖
 
 ![structure](README-img/structure.jpg)
+
+## 更新紀錄
+
+**2021/08/18**
+
+### 重新調整 HTML 結構
+
+原始：
+
+```html
+<!-- layout-header -->
+<header class="header">
+  <!-- block-navigation -->
+  <div class="navigation">
+    <!-- block-logo -->
+    <a href="index.html">
+      <img class="logo" src="images/logo.svg" alt="sunnyside" />
+    </a>
+    <!-- block-hamburger -->
+    <button class="hamburger" id="menuBtn">
+      <img src="images/icon-hamburger.svg" alt="" />
+    </button>
+
+    <!-- component-global-nav -->
+    <nav class="global-nav" id="menu">
+      <ul class="global-nav__menu">
+        <!-- menu-item -->
+      </ul>
+    </nav>
+  </div>
+  <!-- omission -->
+</header>
+```
+
+注意到幾個問題：
+
+**關於`<button>`**
+
+- `<button>`被放置在`<nav>`外面，這樣子的問題是`Screen Reader(螢幕閱讀器)`無法識別出`<button>`與`<nav>`之間的關聯性，所以唸出來的內容就會比較含糊。
+
+- `<button>`沒有包含`Menu`文字，這樣的話使用者就不知道這個按鈕是做什麼用的。
+
+- `<button>`中沒有添加`aria-expanded`屬性，所以使用者無法知道目前的內容是展開還是閉合的。
+
+- `<button>`中沒有添加`aria-controls`屬性，所以使用者無法知道這個按鈕是用來控制什麼東西的。
+
+**關於`<nav>`**
+
+- `<nav>`沒有設定`role="navigation"`屬性，所以對於那些不認得`<nav>`標籤的`瀏覽器`或`Screen Reader(螢幕閱讀器)`來說會是一個問題。
+
+- 此處的 JavaScript 是透過`<nav>`來顯示與隱藏導覽清單，這樣子當`<nav>`沒有被顯示出來時，`Screen Reader(螢幕閱讀器)`在掃描`landmarks(地標標籤)`的時候是無法讀取到`<nav>`的，所以此時使用者就會不知道有你的網站有導覽功能。
+
+針對以上這些問題來重新調整 HTML 的結構，如下所示：
+
+```html
+<!-- layout-header -->
+<header class="header">
+  <!-- component-global-nav -->
+  <nav class="global-nav" role="navigation">
+    <!-- block-menu-button -->
+    <button
+      id="menuBtn"
+      class="global-nav__menu-btn"
+      aria-expanded="false"
+      aria-controls="menu"
+    >
+      <span class="hide">Menu</span>
+      <img src="images/icon-hamburger.svg" alt="" />
+    </button>
+
+    <a href="index.html" aria-label="the company's logo">
+      <img src="images/logo.svg" alt="sunnyside" />
+    </a>
+
+    <!-- block-menu -->
+    <ul id="menu" class="global-nav__menu">
+      <!-- menu-item -->
+    </ul>
+  </nav>
+
+  <!-- omission -->
+</header>
+```
+
+重新檢視原本的問題：
+
+**關於`<button>`**
+
+- `<button>`現在放在`<nav>`裡面，`Screen Reader(螢幕閱讀器)`能夠識別出`<button>`與`<nav>`之間的關聯性
+
+- `<button>`現在有`Menu`文字，使用者可以很清楚知道這是一個選單的按鈕。
+
+- `<button>`中添加了`aria-expanded`屬性，現在使用者知道目前選單的內容是展開還是閉合。
+
+- `<button>`中添加了`aria-controls`屬性，現在使用者知道這個按鈕是用來控制選單的內容。
+
+**關於`<nav>`**
+
+- `<nav>`現在設定了`role="navigation"`屬性，所以即便`瀏覽器`或`Screen Reader(螢幕閱讀器)`不認得`<nav>`標籤，也能從這個屬性得知這是一個導覽列。
+
+- 此處的重新調整 JavaScript，控制`<ul>`來打開和關閉導覽選單，而不是`<nav>`，所以不會有`landmark`消失的問題，同時也控制`<button>`中的`aria-expanded`屬性值，讓按鈕隨著開關狀態的改變來同步更新。
+
+這裡提供一個簡單的演示：
+
+<font size="2">💡 註：注意此時是`<ul>`被控制，且`<button>`中的`aria-expanded`會隨著改變。</font>
+
+![update-demo](README-img/update-demo.gif)
+
+對 JavaScript 的部分有興趣的人可以參考：
+
+```javascript
+// get element
+let menuBtn = document.getElementById('menuBtn')
+let menu = document.getElementById('menu')
+
+// event binding
+menuBtn.addEventListener('click', toggleMenu, false)
+
+// turn on / off the menu
+function toggleMenu() {
+  // if the menu is active
+  if (menu.classList.contains('global-nav__menu--active')) {
+    // set aria-expanded of the button to false
+    this.setAttribute('aria-expanded', 'false')
+    // open the menu
+    menu.classList.remove('global-nav__menu--active')
+  } else {
+    // set aria-expanded of the button to true
+    this.setAttribute('aria-expanded', 'true')
+    // close the menu
+    menu.classList.add('global-nav__menu--active')
+  }
+}
+```
+
+### 採用漸進式增強設計模式
+
+為了確保使用者在沒有 CSS 與 JavaScript 時，也能擁有一定的使用體驗，這裡採用了漸進式增強的設計模式。
+
+這裡直接帶各位看修正前與修正後的對照：
+
+**HTML only**
+
+![no-css](README-img/no-css.jpg)
+
+- 在沒有採取漸進式增強之前，使用者只會看到一個顯示`☰`的`<button>`
+
+- 採取漸進式增強之後，使用者能夠看到一個帶有`menu`文字的`<button>`
+
+**HTML, CSS**
+
+![no-js](README-img/no-js.jpg)
+
+- 在沒有採取漸進式增強之前，使用者只會看到一個放了`☰`的`<button>`，但現在 js 無法控制，所以這個`☰`沒有任何作用，使用者也無法進行導覽。
+
+- 採取漸進式增強之後，使用者會直接看到導覽清單的內容。（這部分可以再利用設計做出更好一點的畫面，但至少我們的使用者現在能夠進行導覽功能）
+
+**HTML, CSS, JavaScript**
+
+![all-enabled](README-img/all-enabled.gif)
+
+當所有功能俱全後，就如我們的最終設計一樣，使用者能看到很好的畫面，按鈕也能夠正常控制導覽列的閉合。
+
+以上就是漸進式增強的大致理念，基本上都是參考[這篇文章](https://www.a11ymatters.com/pattern/mobile-nav/)來設計的，有興趣的人建議可以到裡面看看，作者解釋的很清楚。
 
 ## 我學到什麼
 
@@ -424,6 +589,14 @@ function scrollToFeatureSection(e) {
 只是個小發現，有一部分的文字似乎沒有置中對齊 😂
 
 ![report-02](README-img/report-02.jpg)
+
+### footer 的背景顏色
+
+設計指南中似乎忘了提供 footer 區塊的背景顏色（如果是我漏看的話麻煩再跟我回報一下 😂）。
+
+如果你有需要的話：`hsl(168, 34%, 41%)`
+
+或者你也可以安裝這個 [google 插件](https://chrome.google.com/webstore/detail/colorpick-eyedropper/ohcpnigalekghcmgcdcenkpelffpdolg)，這樣當下次發生類似的問題時，就可以直接透過插件的滴管工具來查看色碼。
 
 ## 關於作者
 
